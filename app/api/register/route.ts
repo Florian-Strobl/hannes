@@ -6,8 +6,13 @@ export async function POST(request: NextRequest) {
   try {
     const { email, password, name, address, role, pin } = await request.json();
 
-    if (!email || !password || !name || !address || !role) {
+    // Address is required for customers, optional for farmers
+    if (!email || !password || !name || !role) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    }
+
+    if (role === 'customer' && !address) {
+      return NextResponse.json({ error: 'Address is required for customers' }, { status: 400 });
     }
 
     if (role !== 'farmer' && role !== 'customer') {
@@ -37,7 +42,7 @@ export async function POST(request: NextRequest) {
         email,
         password: hashedPassword,
         name,
-        address,
+        address: role === 'customer' ? address : '',
         role,
         pin: role === 'farmer' ? pin : (null as unknown as string | null),
       } as any,
