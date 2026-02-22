@@ -146,7 +146,7 @@ export default function Admin() {
                 className="w-full p-2 border rounded"
                 required
               />
-              <button type="submit" className="w-full bg-green-500 text-white p-2 rounded">
+              <button type="submit" className="w-full p-2 rounded theme-button">
                 Add Meat
               </button>
             </form>
@@ -219,7 +219,7 @@ export default function Admin() {
                 <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
                 <button
                   onClick={() => handleClearOrder(order.id)}
-                  className="bg-green-600 text-white px-3 py-1 rounded mt-2"
+                  className="px-3 py-1 rounded mt-2 theme-success"
                 >
                   Mark Delivered
                 </button>

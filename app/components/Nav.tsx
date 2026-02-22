@@ -9,7 +9,7 @@ export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-green-600 p-3 sm:p-4 text-white sticky top-0 z-50">
+    <nav className="top-bar p-3 sm:p-4 text-white sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <Link 
           href="/" 

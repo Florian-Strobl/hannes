@@ -37,6 +37,17 @@ html, body {
   overflow: hidden;
 }
 
+.top-bar {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-strong) 85%, #0f172a), color-mix(in srgb, var(--accent) 80%, #1f2937));
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 35%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+html[data-theme-mode='dark'] .top-bar {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-strong) 70%, #0b0f1a), color-mix(in srgb, var(--accent) 70%, #111827));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 640px) {
   html, body {
@@ -223,6 +234,34 @@ html[data-theme-mode='dark'] .section-bar {
 .fancy-button:active {
   transform: translateY(0);
   box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.theme-button {
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  color: #ffffff;
+  border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 28%, transparent);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.theme-button:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.08);
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.theme-success {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 70%, #22c55e), color-mix(in srgb, var(--accent-strong) 50%, #16a34a));
+  color: #ffffff;
+  border: 1px solid color-mix(in srgb, var(--accent) 60%, #22c55e);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 25%, #22c55e);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.theme-success:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.06);
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--accent) 35%, #22c55e);
 }
 
 .fancy-clear {
