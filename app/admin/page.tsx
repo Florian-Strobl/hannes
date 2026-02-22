@@ -21,11 +21,20 @@ interface Order {
   meat: { name: string };
 }
 
+interface AdminUser {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  createdAt: string;
+}
+
 export default function Admin() {
   const { data: session } = useSession();
   const router = useRouter();
   const [meats, setMeats] = useState<Meat[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
+  const [users, setUsers] = useState<AdminUser[]>([]);
   const [form, setForm] = useState({ name: '', price: '', stock: '' });
 
   const fetchMeats = async () => {
@@ -40,13 +49,21 @@ export default function Admin() {
     setOrders(data);
   };
 
+  const fetchUsers = async () => {
+    const res = await fetch('/api/admin/users');
+    const data = await res.json();
+    if (res.ok) {
+      setUsers(data);
+    }
+  };
+
   useEffect(() => {
     if (!session?.user?.role || session.user.role !== 'farmer') {
       router.push('/');
       return;
     }
     const fetchData = async () => {
-      await Promise.all([fetchMeats(), fetchOrders()]);
+      await Promise.all([fetchMeats(), fetchOrders(), fetchUsers()]);
     };
     fetchData();
   }, [session, router]);
@@ -106,6 +123,24 @@ export default function Admin() {
     } else {
       const error = await res.json();
       alert(error.error || 'Error deleting meat');
+    }
+  };
+
+  const handleDeleteUser = async (userId: string) => {
+    if (!confirm('Delete this user and all their orders?')) return;
+
+    const res = await fetch('/api/admin/users', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId }),
+    });
+
+    if (res.ok) {
+      fetchUsers();
+      fetchOrders();
+    } else {
+      const error = await res.json();
+      alert(error.error || 'Error deleting user');
     }
   };
 
@@ -223,6 +258,26 @@ export default function Admin() {
                 >
                   Mark Delivered
                 </button>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Users</h2>
+            <div className="section-bar"></div>
+            <div className="max-h-[420px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+              {users.map((user) => (
+                <div key={user.id} className="border p-4 rounded mb-4">
+                  <p><strong>Name:</strong> {user.name}</p>
+                  <p><strong>Email:</strong> {user.email}</p>
+                  <p><strong>Role:</strong> {user.role}</p>
+                  <p><strong>Joined:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
+                  <button
+                    onClick={() => handleDeleteUser(user.id)}
+                    className="bg-red-500 text-white px-3 py-1 rounded mt-2"
+                  >
+                    Delete User
+                  </button>
                 </div>
               ))}
             </div>
