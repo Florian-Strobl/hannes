@@ -57,32 +57,49 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="sm:hidden mt-2 pb-2 border-t border-green-500 pt-2">
+        <div className="sm:hidden mt-2 pb-3 border-t border-green-500 pt-3 space-y-2">
           {session?.user ? (
             <>
-              <div className="px-2 py-2 text-sm">Welcome, {session.user.name}</div>
-              <Link href="/profile" className="block px-2 py-2 hover:bg-green-700 rounded text-sm">
-                Profile
+              <div className="px-3 py-2 text-sm font-semibold text-green-50">
+                Welcome, {session.user.name}
+              </div>
+              <Link 
+                href="/profile" 
+                className="block px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95"
+              >
+                👤 Profile
               </Link>
               {session.user.role === 'farmer' && (
-                <Link href="/admin" className="block px-2 py-2 hover:bg-green-700 rounded text-sm">
-                  Admin
+                <Link 
+                  href="/admin" 
+                  className="block px-4 py-3 bg-white hover:bg-gray-100 text-green-600 rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95"
+                >
+                  ⚙️ Admin
                 </Link>
               )}
-              <button onClick={() => {
-                setMobileMenuOpen(false);
-                signOut();
-              }} className="w-full text-left px-2 py-2 hover:bg-green-700 rounded text-sm text-red-200">
-                Logout
+              <button 
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  signOut();
+                }} 
+                className="w-full text-left px-4 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95"
+              >
+                🚪 Logout
               </button>
             </>
           ) : (
             <>
-              <Link href="/login" className="block px-2 py-2 hover:bg-green-700 rounded text-sm">
-                Login
+              <Link 
+                href="/login" 
+                className="block px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95 text-center"
+              >
+                🔑 Login
               </Link>
-              <Link href="/register" className="block px-2 py-2 hover:bg-green-700 rounded text-sm">
-                Register
+              <Link 
+                href="/register" 
+                className="block px-4 py-3 bg-purple-500 hover:bg-purple-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95 text-center"
+              >
+                ✍️ Register
               </Link>
             </>
           )}
