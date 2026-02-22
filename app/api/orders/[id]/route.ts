@@ -3,16 +3,16 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/lib/auth';
 import { prisma } from '@/app/lib/prisma';
 
-export async function DELETE(request: NextRequest, { params }: { params?: { id?: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const idFromPath = request.nextUrl.pathname.split('/').pop();
-    const orderId = params?.id || idFromPath;
+    const orderId = id;
     if (!orderId) {
       return NextResponse.json({ error: 'Order id is required' }, { status: 400 });
     }
