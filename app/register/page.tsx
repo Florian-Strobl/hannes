@@ -57,8 +57,8 @@ export default function Register() {
   return (
     <div>
       <Nav />
-      <div className="container mx-auto p-4 max-w-md">
-        <h1 className="text-2xl font-bold mb-4">Register</h1>
+      <div className="container mx-auto p-2 sm:p-4 max-w-full sm:max-w-md">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4">Register</h1>
         {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input

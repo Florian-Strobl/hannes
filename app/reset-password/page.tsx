@@ -95,7 +95,7 @@ function ResetPasswordContent() {
     return (
       <div>
         <Nav />
-        <div className="container mx-auto p-4 max-w-md">
+        <div className="container mx-auto p-2 sm:p-4 max-w-full sm:max-w-md">
           <div className="text-red-500">Invalid reset link</div>
         </div>
       </div>
@@ -105,8 +105,8 @@ function ResetPasswordContent() {
   return (
     <div>
       <Nav />
-      <div className="container mx-auto p-4 max-w-md">
-        <h1 className="text-2xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>Reset Password/PIN</h1>
+      <div className="container mx-auto p-2 sm:p-4 max-w-full sm:max-w-md">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>Reset Password/PIN</h1>
 
         <div className="mb-4 flex gap-4">
           <button

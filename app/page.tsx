@@ -103,35 +103,35 @@ export default function Home() {
   return (
     <div>
       <Nav />
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-2 sm:p-4">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold mb-4"
+          className="text-xl sm:text-2xl md:text-3xl font-bold mb-4"
         >
           Available Meats
         </motion.h1>
-        <div className="flex gap-2 mb-4">
+        <div className="flex flex-col sm:flex-row gap-2 mb-4">
           <input
             type="text"
             placeholder="Search meats..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 p-2 rounded fancy-input"
+            className="flex-1 p-2 text-sm sm:text-base rounded fancy-input"
           />
           <motion.button
             type="button"
             onClick={() => setSearch('')}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="px-3 py-2 rounded fancy-clear"
+            className="px-3 py-2 rounded fancy-clear text-sm sm:text-base"
           >
             Clear
           </motion.button>
         </div>
         <div className="section-bar"></div>
-        <div className="max-h-[520px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="max-h-[300px] sm:max-h-[400px] md:max-h-[520px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {filteredMeats.map((meat, index) => (
               <motion.div
                 key={meat.id}
@@ -139,14 +139,14 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.03 }}
                 whileHover={{ y: -4 }}
-                className="p-4 rounded fancy-card meat-card"
+                className="p-3 sm:p-4 rounded fancy-card meat-card"
               >
-                <h2 className="text-xl font-semibold">{meat.name}</h2>
-                <p>Price: ${meat.price}/kg</p>
-                <p>Stock: {meat.stock > 0 ? `${meat.stock} kg` : 'Out of stock'}</p>
+                <h2 className="text-base sm:text-lg md:text-xl font-semibold">{meat.name}</h2>
+                <p className="text-sm sm:text-base">Price: ${meat.price}/kg</p>
+                <p className="text-sm sm:text-base">Stock: {meat.stock > 0 ? `${meat.stock} kg` : 'Out of stock'}</p>
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {(session as any)?.user?.role === 'customer' && meat.stock > 0 && (
-                  <div className="mt-2">
+                  <div className="mt-2 flex flex-col sm:flex-row gap-2">
                     <input
                       type="number"
                       min="0.1"
@@ -163,7 +163,7 @@ export default function Home() {
                           if (qty > 0) handleBuy(meat.id, qty);
                         }
                       }}
-                      className="p-1 mr-2 rounded fancy-input"
+                      className="flex-1 p-2 text-sm rounded fancy-input min-w-0"
                     />
                     <motion.button
                       onClick={() => {
@@ -172,7 +172,7 @@ export default function Home() {
                       }}
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.98 }}
-                      className="px-3 py-1 rounded fancy-button"
+                      className="px-3 py-2 rounded fancy-button text-sm whitespace-nowrap"
                     >
                       Buy
                     </motion.button>
@@ -186,28 +186,28 @@ export default function Home() {
 
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {(session as any)?.user?.role === 'customer' && orders.length > 0 && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-4">Your Orders</h2>
+        <div className="mt-6 sm:mt-8 px-2 sm:px-4">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4">Your Orders</h2>
           <div className="section-bar"></div>
-          <div className="max-h-[300px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="max-h-[250px] sm:max-h-[300px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {orders.map((order, index) => (
                 <motion.div
                   key={order.id}
-                  className="p-4 rounded fancy-card"
+                  className="p-3 sm:p-4 rounded fancy-card"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35, delay: index * 0.03 }}
                 >
-                  <h3 className="text-lg font-semibold">{order.meat.name}</h3>
-                  <p>Quantity: {order.quantity} kg</p>
-                  <p>Total: ${order.total}</p>
-                  <p>Date: {new Date(order.createdAt).toLocaleString()}</p>
+                  <h3 className="text-base sm:text-lg font-semibold">{order.meat.name}</h3>
+                  <p className="text-sm">Quantity: {order.quantity} kg</p>
+                  <p className="text-sm">Total: ${order.total}</p>
+                  <p className="text-xs sm:text-sm">Date: {new Date(order.createdAt).toLocaleString()}</p>
                   <motion.button
                     onClick={() => handleCancel(order.id)}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
-                    className="mt-2 px-3 py-1 rounded bg-red-500 text-white shadow-md"
+                    className="mt-2 px-3 py-1 rounded bg-red-500 text-white shadow-md text-sm hover:bg-red-600"
                   >
                     Cancel Order
                   </motion.button>

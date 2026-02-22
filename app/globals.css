@@ -37,6 +37,19 @@ html, body {
   overflow: hidden;
 }
 
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  html, body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html, body {
+    font-size: 13px;
+  }
+}
+
 html[data-theme='butcher'] {
   --background: #fff9f5;
   --foreground: #241a14;

@@ -130,8 +130,8 @@ export default function Login() {
   return (
     <div>
       <Nav />
-      <div className="container mx-auto p-4 max-w-md">
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
+      <div className="container mx-auto p-2 sm:p-4 max-w-full sm:max-w-md">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4">Login</h1>
         
         <div className="mb-4 flex gap-4">
           <button
