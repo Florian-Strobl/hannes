@@ -213,36 +213,38 @@ export default function Home() {
             </div>
           )}
           {!hasMeats ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="rounded-2xl border p-8 sm:p-12 text-center flex flex-col items-center justify-center min-h-[220px]"
-              style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}
-            >
+            <div className="w-full min-h-[calc(100vh-260px)] flex items-center justify-center">
               <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-                className="text-3xl sm:text-4xl md:text-5xl font-black"
-                style={{
-                  backgroundImage: 'linear-gradient(135deg, var(--accent-strong), var(--accent), var(--accent-warm))',
-                  WebkitBackgroundClip: 'text',
-                  color: 'transparent',
-                  textShadow: '0 6px 20px color-mix(in srgb, var(--accent) 35%, transparent)',
-                  letterSpacing: '0.04em',
-                }}
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="rounded-2xl border p-8 sm:p-12 text-center flex flex-col items-center justify-center min-h-[220px] w-full"
+                style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}
               >
-                No offers yet
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+                  className="text-3xl sm:text-4xl md:text-5xl font-black"
+                  style={{
+                    backgroundImage: 'linear-gradient(135deg, var(--accent-strong), var(--accent), var(--accent-warm))',
+                    WebkitBackgroundClip: 'text',
+                    color: 'transparent',
+                    textShadow: '0 6px 20px color-mix(in srgb, var(--accent) 35%, transparent)',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  No offers yet
+                </motion.div>
+                <motion.p
+                  animate={{ opacity: [0.6, 1, 0.6] }}
+                  transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+                  className="mt-3 text-sm sm:text-base"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  Fresh cuts are on the way. Check back soon to buy.
+                </motion.p>
               </motion.div>
-              <motion.p
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
-                className="mt-3 text-sm sm:text-base"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                Fresh cuts are on the way. Check back soon to buy.
-              </motion.p>
-            </motion.div>
+            </div>
           ) : (
             <>
               {hasFilteredMeats && <div className="section-bar"></div>}
