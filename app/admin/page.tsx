@@ -144,6 +144,8 @@ export default function Admin() {
     }
   };
 
+  const hasItems = <T,>(items: T[]) => items.length > 0;
+
   if (!session || !session.user || session.user.role !== 'farmer') {
     return <div>Access denied</div>;
   }
@@ -186,83 +188,89 @@ export default function Admin() {
                 Add Meat
               </button>
             </form>
-            <h2 className="text-2xl font-semibold mb-4 mt-8">Manage Meats</h2>
-            <div className="section-bar"></div>
-            <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
-              {meats.map((meat) => (
-                <div key={meat.id} className="border p-4 rounded mb-4">
-                <h3>{meat.name}</h3>
-                <p>Current price: ${meat.price}</p>
-                <p>Current stock: {meat.stock} kg</p>
-                <input
-                  type="number"
-                  step="0.01"
-                  placeholder="New price"
-                  id={`price-${meat.id}`}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      const price = parseFloat((document.getElementById(`price-${meat.id}`) as HTMLInputElement).value);
-                      const stock = parseFloat((document.getElementById(`stock-${meat.id}`) as HTMLInputElement).value);
-                      if (!isNaN(price) && !isNaN(stock)) handleUpdateMeat(meat.id, stock, price);
-                    }
-                  }}
-                  className="border p-1 mr-2"
-                />
-                <input
-                  type="number"
-                  placeholder="New stock"
-                  id={`stock-${meat.id}`}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      const price = parseFloat((document.getElementById(`price-${meat.id}`) as HTMLInputElement).value);
-                      const stock = parseFloat((document.getElementById(`stock-${meat.id}`) as HTMLInputElement).value);
-                      if (!isNaN(price) && !isNaN(stock)) handleUpdateMeat(meat.id, stock, price);
-                    }
-                  }}
-                  className="border p-1 mr-2"
-                />
-                <button
-                  onClick={() => {
-                    const price = parseFloat((document.getElementById(`price-${meat.id}`) as HTMLInputElement).value);
-                    const stock = parseFloat((document.getElementById(`stock-${meat.id}`) as HTMLInputElement).value);
-                    if (!isNaN(price) && !isNaN(stock)) handleUpdateMeat(meat.id, stock, price);
-                  }}
-                  className="bg-blue-500 text-white px-3 py-1 rounded"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => handleDeleteMeat(meat.id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded ml-2"
-                >
-                  Delete
-                </button>
+            {hasItems(meats) && (
+              <>
+                <h2 className="text-2xl font-semibold mb-4 mt-8">Manage Meats</h2>
+                <div className="section-bar"></div>
+                <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+                  {meats.map((meat) => (
+                    <div key={meat.id} className="border p-4 rounded mb-4">
+                    <h3>{meat.name}</h3>
+                    <p>Current price: ${meat.price}</p>
+                    <p>Current stock: {meat.stock} kg</p>
+                    <input
+                      type="number"
+                      step="0.01"
+                      placeholder="New price"
+                      id={`price-${meat.id}`}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          const price = parseFloat((document.getElementById(`price-${meat.id}`) as HTMLInputElement).value);
+                          const stock = parseFloat((document.getElementById(`stock-${meat.id}`) as HTMLInputElement).value);
+                          if (!isNaN(price) && !isNaN(stock)) handleUpdateMeat(meat.id, stock, price);
+                        }
+                      }}
+                      className="border p-1 mr-2"
+                    />
+                    <input
+                      type="number"
+                      placeholder="New stock"
+                      id={`stock-${meat.id}`}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          const price = parseFloat((document.getElementById(`price-${meat.id}`) as HTMLInputElement).value);
+                          const stock = parseFloat((document.getElementById(`stock-${meat.id}`) as HTMLInputElement).value);
+                          if (!isNaN(price) && !isNaN(stock)) handleUpdateMeat(meat.id, stock, price);
+                        }
+                      }}
+                      className="border p-1 mr-2"
+                    />
+                    <button
+                      onClick={() => {
+                        const price = parseFloat((document.getElementById(`price-${meat.id}`) as HTMLInputElement).value);
+                        const stock = parseFloat((document.getElementById(`stock-${meat.id}`) as HTMLInputElement).value);
+                        if (!isNaN(price) && !isNaN(stock)) handleUpdateMeat(meat.id, stock, price);
+                      }}
+                      className="bg-blue-500 text-white px-3 py-1 rounded"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => handleDeleteMeat(meat.id)}
+                      className="bg-red-500 text-white px-3 py-1 rounded ml-2"
+                    >
+                      Delete
+                    </button>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </div>
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Orders</h2>
-            <div className="section-bar"></div>
-            <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
-              {orders.map((order) => (
-                <div key={order.id} className="border p-4 rounded mb-4">
-                <p><strong>Customer:</strong> {order.user.name} ({order.user.email})</p>
-                <p><strong>Address:</strong> {order.user.address}</p>
-                <p><strong>Meat:</strong> {order.meat.name}</p>
-                <p><strong>Quantity:</strong> {order.quantity} kg</p>
-                <p><strong>Total:</strong> ${order.total}</p>
-                <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
-                <button
-                  onClick={() => handleClearOrder(order.id)}
-                  className="px-3 py-1 rounded mt-2 theme-success"
-                >
-                  Mark Delivered
-                </button>
-                </div>
-              ))}
+          {hasItems(orders) && (
+            <div>
+              <h2 className="text-2xl font-semibold mb-4">Orders</h2>
+              <div className="section-bar"></div>
+              <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+                {orders.map((order) => (
+                  <div key={order.id} className="border p-4 rounded mb-4">
+                  <p><strong>Customer:</strong> {order.user.name} ({order.user.email})</p>
+                  <p><strong>Address:</strong> {order.user.address}</p>
+                  <p><strong>Meat:</strong> {order.meat.name}</p>
+                  <p><strong>Quantity:</strong> {order.quantity} kg</p>
+                  <p><strong>Total:</strong> ${order.total}</p>
+                  <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
+                  <button
+                    onClick={() => handleClearOrder(order.id)}
+                    className="px-3 py-1 rounded mt-2 theme-success"
+                  >
+                    Mark Delivered
+                  </button>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           <div>
             <h2 className="text-2xl font-semibold mb-4">Users</h2>
             <div className="section-bar"></div>
