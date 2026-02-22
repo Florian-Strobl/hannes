@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Nav from './components/Nav';
+import { useTheme } from './components/ThemeProvider';
 import { motion } from 'framer-motion';
 
 interface Meat {
@@ -23,6 +24,7 @@ interface Order {
 
 export default function Home() {
   const { data: session } = useSession();
+  const { theme, mode, setTheme, toggleMode } = useTheme();
   const [meats, setMeats] = useState<Meat[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [search, setSearch] = useState('');
@@ -104,6 +106,53 @@ export default function Home() {
     <div>
       <Nav />
       <div className="container mx-auto p-2 sm:p-4">
+        {!session && (
+          <div className="mb-6 rounded-lg border p-3 sm:p-4" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <h2 className="text-base sm:text-lg font-semibold">Theme</h2>
+                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Customize the look before you log in.</p>
+              </div>
+              <button
+                type="button"
+                onClick={toggleMode}
+                className="px-3 py-1 rounded border text-sm"
+                style={{ backgroundColor: 'var(--input-bg)', borderColor: 'var(--card-border)', color: 'var(--foreground)' }}
+              >
+                {mode === 'dark' ? 'Dark' : 'Light'} Mode
+              </button>
+            </div>
+            <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <button
+                type="button"
+                onClick={() => setTheme('butcher')}
+                className={`rounded p-2 text-left border ${theme === 'butcher' ? 'bg-orange-100 border-orange-400' : ''}`}
+                style={theme !== 'butcher' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+              >
+                <div className="font-semibold" style={{ color: theme === 'butcher' ? '#7c2d12' : 'var(--foreground)' }}>Butcher</div>
+                <div className="text-xs" style={{ color: theme === 'butcher' ? '#92400e' : 'var(--text-muted)' }}>Warm & rustic</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setTheme('forest')}
+                className={`rounded p-2 text-left border ${theme === 'forest' ? 'bg-green-100 border-green-400' : ''}`}
+                style={theme !== 'forest' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+              >
+                <div className="font-semibold" style={{ color: theme === 'forest' ? '#14532d' : 'var(--foreground)' }}>Forest</div>
+                <div className="text-xs" style={{ color: theme === 'forest' ? '#166534' : 'var(--text-muted)' }}>Fresh & earthy</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setTheme('stone')}
+                className={`rounded p-2 text-left border ${theme === 'stone' ? 'bg-blue-100 border-blue-400' : ''}`}
+                style={theme !== 'stone' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+              >
+                <div className="font-semibold" style={{ color: theme === 'stone' ? '#1e3a8a' : 'var(--foreground)' }}>Stone</div>
+                <div className="text-xs" style={{ color: theme === 'stone' ? '#1e40af' : 'var(--text-muted)' }}>Cool & clean</div>
+              </button>
+            </div>
+          </div>
+        )}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
