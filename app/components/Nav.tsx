@@ -11,8 +11,16 @@ export default function Nav() {
   return (
     <nav className="bg-green-600 p-3 sm:p-4 text-white sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-lg sm:text-xl font-bold">
-          Farmer&apos;s Meat Shop
+        <Link 
+          href="/" 
+          className="text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-yellow-200 via-yellow-100 to-orange-200 bg-clip-text text-transparent drop-shadow-lg hover:drop-shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
+          style={{
+            textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+            fontFamily: 'Georgia, serif',
+            letterSpacing: '0.05em',
+          }}
+        >
+          Fleischshop Johannes
         </Link>
         
         {/* Mobile menu button */}
