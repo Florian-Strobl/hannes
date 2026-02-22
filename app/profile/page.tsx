@@ -198,14 +198,15 @@ export default function Profile() {
   return (
     <div>
       <Nav />
-      <div className="container mx-auto p-4 max-w-2xl">
-        <h1 className="text-3xl font-bold mb-6">My Profile</h1>
+      <div className="container mx-auto p-2 sm:p-4 max-w-2xl">
+        <div className="max-h-[calc(100vh-140px)] overflow-y-auto pr-2 no-scrollbar pb-6">
+          <h1 className="text-3xl font-bold mb-6">My Profile</h1>
 
-        {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4">{error}</div>}
-        {success && <div className="bg-green-100 text-green-700 p-3 rounded mb-4">{success}</div>}
+          {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4">{error}</div>}
+          {success && <div className="bg-green-100 text-green-700 p-3 rounded mb-4">{success}</div>}
 
-        {!editing ? (
-          <div className="space-y-6">
+          {!editing ? (
+            <div className="space-y-6">
             <div className="border rounded p-6">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-xl font-semibold">Theme</h2>
@@ -320,9 +321,9 @@ export default function Profile() {
                 Edit Profile
               </button>
             </div>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 border rounded p-6">
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4 border rounded p-6">
             <div>
               <label className="block font-semibold mb-2">Profile Picture</label>
               <input
@@ -434,8 +435,9 @@ export default function Profile() {
                 Cancel
               </button>
             </div>
-          </form>
-        )}
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );
