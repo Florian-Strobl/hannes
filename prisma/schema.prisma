@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String   @id @default(cuid())
+  email              String   @unique
+  password           String
+  name               String
+  address            String
+  role               String   // 'farmer' or 'customer'
+  pin                String?  // PIN for farmer login
+  profileImage       String?  // Profile picture URL
+  resetToken         String?  @unique
+  resetTokenExpires  DateTime?
+  verificationCode   String?
+  verificationCodeExpires DateTime?
+  orders             Order[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Meat {
+  id        String   @id @default(cuid())
+  name      String
+  price     Float
+  stock     Float   // kg
+  orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id       String   @id @default(cuid())
+  userId   String
+  user     User     @relation(fields: [userId], references: [id])
+  meatId   String
+  meat     Meat     @relation(fields: [meatId], references: [id])
+  quantity Float    // kg
+  total    Float
+  createdAt DateTime @default(now())
+}
