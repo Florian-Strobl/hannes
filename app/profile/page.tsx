@@ -218,7 +218,7 @@ export default function Profile() {
                   {mode === 'dark' ? 'Dark' : 'Light'} Mode
                 </button>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                 <button
                   type="button"
                   onClick={() => setTheme('butcher')}
@@ -245,6 +245,33 @@ export default function Profile() {
                 >
                   <div className="font-semibold" style={{ color: theme === 'stone' ? '#1e3a8a' : 'var(--foreground)' }}>Stone</div>
                   <div className="text-sm" style={{ color: theme === 'stone' ? '#1e40af' : 'var(--text-muted)' }}>Cool & clean</div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTheme('violet')}
+                  className={`rounded p-3 text-left border ${theme === 'violet' ? 'bg-purple-100 border-purple-400' : ''}`}
+                  style={theme !== 'violet' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                >
+                  <div className="font-semibold" style={{ color: theme === 'violet' ? '#6d28d9' : 'var(--foreground)' }}>Violet</div>
+                  <div className="text-sm" style={{ color: theme === 'violet' ? '#7c3aed' : 'var(--text-muted)' }}>Lush & radiant</div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTheme('midnight')}
+                  className={`rounded p-3 text-left border ${theme === 'midnight' ? 'bg-slate-900 border-violet-400' : ''}`}
+                  style={theme !== 'midnight' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#e9e7ff' }}
+                >
+                  <div className="font-semibold" style={{ color: theme === 'midnight' ? '#c4b5fd' : 'var(--foreground)' }}>Midnight</div>
+                  <div className="text-sm" style={{ color: theme === 'midnight' ? '#a78bfa' : 'var(--text-muted)' }}>Noir & electric</div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTheme('obsidian')}
+                  className={`rounded p-3 text-left border ${theme === 'obsidian' ? 'bg-zinc-900 border-fuchsia-400' : ''}`}
+                  style={theme !== 'obsidian' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#f0e7ff' }}
+                >
+                  <div className="font-semibold" style={{ color: theme === 'obsidian' ? '#d8b4fe' : 'var(--foreground)' }}>Obsidian</div>
+                  <div className="text-sm" style={{ color: theme === 'obsidian' ? '#c084fc' : 'var(--text-muted)' }}>Ink & violet</div>
                 </button>
               </div>
             </div>

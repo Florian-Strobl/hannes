@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
-type ThemeName = 'butcher' | 'forest' | 'stone';
+type ThemeName = 'butcher' | 'forest' | 'stone' | 'violet' | 'midnight' | 'obsidian';
 type ThemeMode = 'light' | 'dark';
 
 interface ThemeContextValue {

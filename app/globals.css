@@ -86,6 +86,54 @@ html[data-theme='stone'] {
   --accent-warm-dark: #7c2d12;
 }
 
+html[data-theme='violet'] {
+  --background: #f7f3ff;
+  --foreground: #1c122b;
+  --card-bg: rgba(247, 242, 255, 0.96);
+  --card-border: rgba(124, 58, 237, 0.16);
+  --input-bg: #efe9ff;
+  --accent: #7c3aed;
+  --accent-strong: #6d28d9;
+  --accent-warm: #f472b6;
+  --accent-warm-dark: #be185d;
+  --text-muted: #5b4a73;
+  --text-normal: #3f2c52;
+  --border-normal: #d6c8ff;
+  --bg-muted: #e7ddff;
+}
+
+html[data-theme='midnight'] {
+  --background: #0b0b14;
+  --foreground: #f1f1f7;
+  --card-bg: rgba(14, 14, 24, 0.96);
+  --card-border: rgba(160, 160, 255, 0.12);
+  --input-bg: #14142a;
+  --accent: #8b5cf6;
+  --accent-strong: #7c3aed;
+  --accent-warm: #c4b5fd;
+  --accent-warm-dark: #a78bfa;
+  --text-muted: #a3a3c2;
+  --text-normal: #e6e6f0;
+  --border-normal: #3a3a55;
+  --bg-muted: #1c1c2c;
+}
+
+html[data-theme='obsidian'] {
+  --background: #0f0f12;
+  --foreground: #e8e7f2;
+  --card-bg: rgba(22, 22, 28, 0.96);
+  --card-border: rgba(145, 120, 255, 0.15);
+  --input-bg: #1a1a24;
+  --accent: #a78bfa;
+  --accent-strong: #8b5cf6;
+  --accent-warm: #f0abfc;
+  --accent-warm-dark: #c084fc;
+  --text-muted: #b0a7c8;
+  --text-normal: #e0d9f0;
+  --border-normal: #3b3350;
+  --bg-muted: #221b30;
+}
+
 html[data-theme-mode='dark'] {
   --background: #0f1113;
   --foreground: #e6e7eb;
@@ -206,4 +254,42 @@ html[data-theme-mode='dark'] .section-bar {
 .meat-card {
   background: linear-gradient(180deg, color-mix(in srgb, var(--card-bg) 88%, #ffffff), color-mix(in srgb, var(--card-bg) 94%, #ffffff));
   border-color: color-mix(in srgb, var(--card-border) 90%, #ffffff);
+}
+
+@keyframes themeSheen {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes themePulse {
+  0% {
+    box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+  50% {
+    box-shadow: 0 12px 24px color-mix(in srgb, var(--accent) 36%, transparent);
+  }
+  100% {
+    box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+}
+
+html[data-theme='violet'] .fancy-card,
+html[data-theme='midnight'] .fancy-card,
+html[data-theme='obsidian'] .fancy-card {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--card-bg) 82%, var(--accent) 18%), color-mix(in srgb, var(--card-bg) 92%, #000000 8%));
+  background-size: 200% 200%;
+  animation: themeSheen 10s ease-in-out infinite;
+}
+
+html[data-theme='violet'] .fancy-button,
+html[data-theme='midnight'] .fancy-button,
+html[data-theme='obsidian'] .fancy-button {
+  animation: themePulse 6s ease-in-out infinite;
 }
