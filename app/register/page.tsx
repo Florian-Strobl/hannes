@@ -85,13 +85,15 @@ export default function Register() {
             className="w-full p-2 border rounded"
             required
           />
-          <textarea
-            placeholder="Address"
-            value={form.address}
-            onChange={(e) => setForm({ ...form, address: e.target.value })}
-            className="w-full p-2 border rounded"
-            required
-          />
+          {form.role === 'customer' && (
+            <textarea
+              placeholder="Address"
+              value={form.address}
+              onChange={(e) => setForm({ ...form, address: e.target.value })}
+              className="w-full p-2 border rounded"
+              required
+            />
+          )}
           <select
             value={form.role}
             onChange={(e) => setForm({ ...form, role: e.target.value })}
