@@ -153,7 +153,8 @@ export default function Admin() {
       <Nav />
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">Admin Panel</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="max-h-[calc(100vh-160px)] overflow-y-auto pr-2 no-scrollbar">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-6">
           <div>
             <h2 className="text-2xl font-semibold mb-4">Add Meat</h2>
             <form onSubmit={handleAddMeat} className="space-y-4">
@@ -187,7 +188,7 @@ export default function Admin() {
             </form>
             <h2 className="text-2xl font-semibold mb-4 mt-8">Manage Meats</h2>
             <div className="section-bar"></div>
-            <div className="max-h-[420px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+            <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
               {meats.map((meat) => (
                 <div key={meat.id} className="border p-4 rounded mb-4">
                 <h3>{meat.name}</h3>
@@ -243,7 +244,7 @@ export default function Admin() {
           <div>
             <h2 className="text-2xl font-semibold mb-4">Orders</h2>
             <div className="section-bar"></div>
-            <div className="max-h-[420px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+            <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
               {orders.map((order) => (
                 <div key={order.id} className="border p-4 rounded mb-4">
                 <p><strong>Customer:</strong> {order.user.name} ({order.user.email})</p>
@@ -265,7 +266,7 @@ export default function Admin() {
           <div>
             <h2 className="text-2xl font-semibold mb-4">Users</h2>
             <div className="section-bar"></div>
-            <div className="max-h-[420px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+            <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
               {users.map((user) => (
                 <div key={user.id} className="border p-4 rounded mb-4">
                   <p><strong>Name:</strong> {user.name}</p>
@@ -281,6 +282,7 @@ export default function Admin() {
                 </div>
               ))}
             </div>
+          </div>
           </div>
         </div>
       </div>
