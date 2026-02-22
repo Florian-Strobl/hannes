@@ -274,10 +274,12 @@ export default function Profile() {
                   <label className="font-semibold">Name:</label>
                   <p style={{ color: 'var(--text-normal)' }}>{profile.name}</p>
                 </div>
-                <div>
-                  <label className="font-semibold">Address:</label>
-                  <p style={{ color: 'var(--text-normal)' }}>{profile.address}</p>
-                </div>
+                {profile.role === 'customer' && (
+                  <div>
+                    <label className="font-semibold">Address:</label>
+                    <p style={{ color: 'var(--text-normal)' }}>{profile.address}</p>
+                  </div>
+                )}
                 <div>
                   <label className="font-semibold">Role:</label>
                   <p className="capitalize" style={{ color: 'var(--text-normal)' }}>{profile.role}</p>
@@ -323,15 +325,17 @@ export default function Profile() {
               />
             </div>
 
-            <div>
-              <label className="block font-semibold mb-2">Address</label>
-              <input
-                type="text"
-                value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                className="w-full p-2 border rounded"
-              />
-            </div>
+            {profile.role === 'customer' && (
+              <div>
+                <label className="block font-semibold mb-2">Address</label>
+                <input
+                  type="text"
+                  value={formData.address}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  className="w-full p-2 border rounded"
+                />
+              </div>
+            )}
 
             <div>
               <label className="block font-semibold mb-2">New Password (leave blank to keep current)</label>
