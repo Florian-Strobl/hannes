@@ -192,30 +192,32 @@ export default function Home() {
           >
             Available Meats
           </motion.h1>
-          <div className="flex flex-col sm:flex-row gap-2 mb-4">
-            <input
-              type="text"
-              placeholder="Search meats..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 p-2 text-sm sm:text-base rounded fancy-input"
-            />
-            <motion.button
-              type="button"
-              onClick={() => setSearch('')}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-3 py-2 rounded fancy-clear text-sm sm:text-base"
-            >
-              Clear
-            </motion.button>
-          </div>
+          {hasMeats && (
+            <div className="flex flex-col sm:flex-row gap-2 mb-4">
+              <input
+                type="text"
+                placeholder="Search meats..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="flex-1 p-2 text-sm sm:text-base rounded fancy-input"
+              />
+              <motion.button
+                type="button"
+                onClick={() => setSearch('')}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-3 py-2 rounded fancy-clear text-sm sm:text-base"
+              >
+                Clear
+              </motion.button>
+            </div>
+          )}
           {!hasMeats ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="rounded-2xl border p-8 sm:p-12 text-center"
+              className="rounded-2xl border p-8 sm:p-12 text-center flex flex-col items-center justify-center min-h-[220px]"
               style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}
             >
               <motion.div
