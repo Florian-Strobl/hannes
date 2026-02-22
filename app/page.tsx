@@ -66,6 +66,8 @@ export default function Home() {
   );
 
   const hasItems = <T,>(items: T[]) => items.length > 0;
+  const hasMeats = hasItems(meats);
+  const hasFilteredMeats = hasItems(filteredMeats);
 
   const handleBuy = async (meatId: string, quantity: number) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -182,88 +184,123 @@ export default function Home() {
             </div>
           </div>
         )}
-        {hasItems(filteredMeats) && (
-          <>
-            <motion.h1
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-xl sm:text-2xl md:text-3xl font-bold mb-4"
+        <>
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-xl sm:text-2xl md:text-3xl font-bold mb-4"
+          >
+            Available Meats
+          </motion.h1>
+          <div className="flex flex-col sm:flex-row gap-2 mb-4">
+            <input
+              type="text"
+              placeholder="Search meats..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="flex-1 p-2 text-sm sm:text-base rounded fancy-input"
+            />
+            <motion.button
+              type="button"
+              onClick={() => setSearch('')}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-3 py-2 rounded fancy-clear text-sm sm:text-base"
             >
-              Available Meats
-            </motion.h1>
-            <div className="flex flex-col sm:flex-row gap-2 mb-4">
-              <input
-                type="text"
-                placeholder="Search meats..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="flex-1 p-2 text-sm sm:text-base rounded fancy-input"
-              />
-              <motion.button
-                type="button"
-                onClick={() => setSearch('')}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-3 py-2 rounded fancy-clear text-sm sm:text-base"
+              Clear
+            </motion.button>
+          </div>
+          {!hasMeats ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="rounded-2xl border p-8 sm:p-12 text-center"
+              style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}
+            >
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+                className="text-3xl sm:text-4xl md:text-5xl font-black"
+                style={{
+                  backgroundImage: 'linear-gradient(135deg, var(--accent-strong), var(--accent), var(--accent-warm))',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                  textShadow: '0 6px 20px color-mix(in srgb, var(--accent) 35%, transparent)',
+                  letterSpacing: '0.04em',
+                }}
               >
-                Clear
-              </motion.button>
-            </div>
-            <div className="section-bar"></div>
-            <div className="max-h-[300px] sm:max-h-[400px] md:max-h-[520px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                {filteredMeats.map((meat, index) => (
-                  <motion.div
-                    key={meat.id}
-                    initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.03 }}
-                    whileHover={{ y: -4 }}
-                    className="p-3 sm:p-4 rounded fancy-card meat-card"
-                  >
-                    <h2 className="text-base sm:text-lg md:text-xl font-semibold">{meat.name}</h2>
-                    <p className="text-sm sm:text-base">Price: ${meat.price}/kg</p>
-                    <p className="text-sm sm:text-base">Stock: {meat.stock > 0 ? `${meat.stock} kg` : 'Out of stock'}</p>
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                    {(session as any)?.user?.role === 'customer' && meat.stock > 0 && (
-                      <div className="mt-2 flex flex-col sm:flex-row gap-2">
-                        <input
-                          type="number"
-                          min="0.1"
-                          step="0.1"
-                          placeholder="kg"
-                          id={`qty-${meat.id}`}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              const value = (e.currentTarget as HTMLInputElement).value;
-                              if (!value) {
-                                return;
-                              }
-                              const qty = parseFloat(value);
-                              if (qty > 0) handleBuy(meat.id, qty);
-                            }
-                          }}
-                          className="flex-1 p-2 text-sm rounded fancy-input min-w-0"
-                        />
-                        <motion.button
-                          onClick={() => {
-                            const qty = parseFloat((document.getElementById(`qty-${meat.id}`) as HTMLInputElement).value);
-                            if (qty > 0) handleBuy(meat.id, qty);
-                          }}
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="px-3 py-2 rounded fancy-button text-sm whitespace-nowrap"
-                        >
-                          Buy
-                        </motion.button>
-                      </div>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </>
-        )}
+                No offers yet
+              </motion.div>
+              <motion.p
+                animate={{ opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+                className="mt-3 text-sm sm:text-base"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Fresh cuts are on the way. Check back soon to buy.
+              </motion.p>
+            </motion.div>
+          ) : (
+            <>
+              {hasFilteredMeats && <div className="section-bar"></div>}
+              {hasFilteredMeats && (
+                <div className="max-h-[300px] sm:max-h-[400px] md:max-h-[520px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                    {filteredMeats.map((meat, index) => (
+                      <motion.div
+                        key={meat.id}
+                        initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.03 }}
+                        whileHover={{ y: -4 }}
+                        className="p-3 sm:p-4 rounded fancy-card meat-card"
+                      >
+                        <h2 className="text-base sm:text-lg md:text-xl font-semibold">{meat.name}</h2>
+                        <p className="text-sm sm:text-base">Price: ${meat.price}/kg</p>
+                        <p className="text-sm sm:text-base">Stock: {meat.stock > 0 ? `${meat.stock} kg` : 'Out of stock'}</p>
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                        {(session as any)?.user?.role === 'customer' && meat.stock > 0 && (
+                          <div className="mt-2 flex flex-col sm:flex-row gap-2">
+                            <input
+                              type="number"
+                              min="0.1"
+                              step="0.1"
+                              placeholder="kg"
+                              id={`qty-${meat.id}`}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  const value = (e.currentTarget as HTMLInputElement).value;
+                                  if (!value) {
+                                    return;
+                                  }
+                                  const qty = parseFloat(value);
+                                  if (qty > 0) handleBuy(meat.id, qty);
+                                }
+                              }}
+                              className="flex-1 p-2 text-sm rounded fancy-input min-w-0"
+                            />
+                            <motion.button
+                              onClick={() => {
+                                const qty = parseFloat((document.getElementById(`qty-${meat.id}`) as HTMLInputElement).value);
+                                if (qty > 0) handleBuy(meat.id, qty);
+                              }}
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.98 }}
+                              className="px-3 py-2 rounded fancy-button text-sm whitespace-nowrap"
+                            >
+                              Buy
+                            </motion.button>
+                          </div>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </>
       </div>
 
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
