@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Nav from './components/Nav';
 import { useTheme } from './components/ThemeProvider';
+import { useTranslation } from './components/TranslationProvider';
 import { motion } from 'framer-motion';
 
 interface Meat {
@@ -25,6 +26,7 @@ interface Order {
 export default function Home() {
   const { data: session } = useSession();
   const { theme, mode, setTheme, toggleMode } = useTheme();
+  const { t } = useTranslation();
   const [meats, setMeats] = useState<Meat[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [search, setSearch] = useState('');
@@ -190,13 +192,13 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="text-xl sm:text-2xl md:text-3xl font-bold mb-4"
           >
-            Available Meats
+            {t('home.availableMeats', 'Available Meats')}
           </motion.h1>
           {hasMeats && (
             <div className="flex flex-col sm:flex-row gap-2 mb-4">
               <input
                 type="text"
-                placeholder="Search meats..."
+                placeholder={t('home.search', 'Search meats...')}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="flex-1 p-2 text-sm sm:text-base rounded fancy-input"
@@ -208,7 +210,7 @@ export default function Home() {
                 whileTap={{ scale: 0.98 }}
                 className="px-3 py-2 rounded fancy-clear text-sm sm:text-base"
               >
-                Clear
+                {t('home.clear', 'Clear')}
               </motion.button>
             </div>
           )}
@@ -233,7 +235,7 @@ export default function Home() {
                     letterSpacing: '0.04em',
                   }}
                 >
-                  No offers yet
+                  {t('home.noOffers', 'No offers yet')}
                 </motion.div>
                 <motion.p
                   animate={{ opacity: [0.6, 1, 0.6] }}
@@ -241,7 +243,7 @@ export default function Home() {
                   className="mt-3 text-sm sm:text-base"
                   style={{ color: 'var(--text-muted)' }}
                 >
-                  Fresh cuts are on the way. Check back soon to buy.
+                  {t('home.noOffersSub', 'Fresh cuts are on the way. Check back soon to buy.')}
                 </motion.p>
               </motion.div>
             </div>
@@ -261,8 +263,8 @@ export default function Home() {
                         className="p-3 sm:p-4 rounded fancy-card meat-card"
                       >
                         <h2 className="text-base sm:text-lg md:text-xl font-semibold">{meat.name}</h2>
-                        <p className="text-sm sm:text-base">Price: ${meat.price}/kg</p>
-                        <p className="text-sm sm:text-base">Stock: {meat.stock > 0 ? `${meat.stock} kg` : 'Out of stock'}</p>
+                        <p className="text-sm sm:text-base">{t('home.price', 'Price')}: ${meat.price}/kg</p>
+                        <p className="text-sm sm:text-base">{t('home.stock', 'Stock')}: {meat.stock > 0 ? `${meat.stock} kg` : t('home.outOfStock', 'Out of stock')}</p>
                     {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                         {(session as any)?.user?.role === 'customer' && meat.stock > 0 && (
                           <div className="mt-2 flex flex-col sm:flex-row gap-2">
@@ -293,7 +295,7 @@ export default function Home() {
                               whileTap={{ scale: 0.98 }}
                               className="px-3 py-2 rounded fancy-button text-sm whitespace-nowrap"
                             >
-                              Buy
+                              {t('home.buy', 'Buy')}
                             </motion.button>
                           </div>
                         )}
@@ -310,7 +312,7 @@ export default function Home() {
       {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       {(session as any)?.user?.role === 'customer' && orders.length > 0 && (
         <div className="mt-6 sm:mt-8 px-2 sm:px-4">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4">Your Orders</h2>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-4">{t('home.yourOrders', 'Your Orders')}</h2>
           <div className="section-bar"></div>
           <div className="max-h-[250px] sm:max-h-[300px] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
@@ -323,16 +325,16 @@ export default function Home() {
                   transition={{ duration: 0.35, delay: index * 0.03 }}
                 >
                   <h3 className="text-base sm:text-lg font-semibold">{order.meat.name}</h3>
-                  <p className="text-sm">Quantity: {order.quantity} kg</p>
-                  <p className="text-sm">Total: ${order.total}</p>
-                  <p className="text-xs sm:text-sm">Date: {new Date(order.createdAt).toLocaleString()}</p>
+                  <p className="text-sm">{t('home.quantity', 'Quantity')}: {order.quantity} kg</p>
+                  <p className="text-sm">{t('home.total', 'Total')}: ${order.total}</p>
+                  <p className="text-xs sm:text-sm">{t('home.date', 'Date')}: {new Date(order.createdAt).toLocaleString()}</p>
                   <motion.button
                     onClick={() => handleCancel(order.id)}
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     className="mt-2 px-3 py-1 rounded bg-red-500 text-white shadow-md text-sm hover:bg-red-600"
                   >
-                    Cancel Order
+                    {t('home.cancelOrder', 'Cancel Order')}
                   </motion.button>
                 </motion.div>
               ))}

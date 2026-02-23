@@ -3,10 +3,12 @@
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useTranslation } from './TranslationProvider';
 
 export default function Nav() {
   const { data: session } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <nav className="top-bar p-3 sm:p-4 text-white sticky top-0 z-50">
@@ -37,26 +39,26 @@ export default function Nav() {
         <div className="hidden sm:flex items-center space-x-2 sm:space-x-4">
           {session?.user ? (
             <>
-              <span className="text-sm sm:text-base">Welcome, {session.user.name}</span>
+              <span className="text-sm sm:text-base">{t('nav.welcome', 'Welcome,')} {session.user.name}</span>
               <Link href="/profile" className="bg-blue-500 text-white px-2 sm:px-3 py-1 rounded text-sm sm:text-base hover:bg-blue-600">
-                Profile
+                {t('nav.profile', 'Profile')}
               </Link>
               {session.user.role === 'farmer' && (
                 <Link href="/admin" className="bg-white text-green-600 px-2 sm:px-3 py-1 rounded text-sm sm:text-base hover:bg-gray-100">
-                  Admin
+                  {t('nav.admin', 'Admin')}
                 </Link>
               )}
               <button onClick={() => signOut()} className="bg-red-500 px-2 sm:px-3 py-1 rounded text-sm sm:text-base hover:bg-red-600">
-                Logout
+                {t('nav.logout', 'Logout')}
               </button>
             </>
           ) : (
             <>
               <Link href="/login" className="bg-blue-500 px-2 sm:px-3 py-1 rounded text-white text-sm sm:text-base hover:bg-blue-600">
-                Login
+                {t('nav.login', 'Login')}
               </Link>
               <Link href="/register" className="bg-gray-500 px-2 sm:px-3 py-1 rounded text-white text-sm sm:text-base hover:bg-gray-600">
-                Register
+                {t('nav.register', 'Register')}
               </Link>
             </>
           )}
@@ -69,20 +71,20 @@ export default function Nav() {
           {session?.user ? (
             <>
               <div className="px-3 py-2 text-sm font-semibold text-green-50">
-                Welcome, {session.user.name}
+                {t('nav.welcome', 'Welcome,')} {session.user.name}
               </div>
               <Link 
                 href="/profile" 
                 className="block px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95"
               >
-                👤 Profile
+                👤 {t('nav.profile', 'Profile')}
               </Link>
               {session.user.role === 'farmer' && (
                 <Link 
                   href="/admin" 
                   className="block px-4 py-3 bg-white hover:bg-gray-100 text-green-600 rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95"
                 >
-                  ⚙️ Admin
+                  ⚙️ {t('nav.admin', 'Admin')}
                 </Link>
               )}
               <button 
@@ -92,7 +94,7 @@ export default function Nav() {
                 }} 
                 className="w-full text-left px-4 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95"
               >
-                🚪 Logout
+                🚪 {t('nav.logout', 'Logout')}
               </button>
             </>
           ) : (
@@ -101,13 +103,13 @@ export default function Nav() {
                 href="/login" 
                 className="block px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95 text-center"
               >
-                🔑 Login
+                🔑 {t('nav.login', 'Login')}
               </Link>
               <Link 
                 href="/register" 
                 className="block px-4 py-3 bg-purple-500 hover:bg-purple-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95 text-center"
               >
-                ✍️ Register
+                ✍️ {t('nav.register', 'Register')}
               </Link>
             </>
           )}

@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useTranslation } from './TranslationProvider';
 
 type Language = {
   code: string;
@@ -60,16 +61,9 @@ const LANGUAGES: Language[] = [
 const STORAGE_KEY = 'meatshop-language';
 
 export default function LanguageSwitcher() {
+  const { language, setLanguage, t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      setSelectedLanguage(saved);
-    }
-  }, []);
 
   const filteredLanguages = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -82,9 +76,8 @@ export default function LanguageSwitcher() {
   }, [query]);
 
   const applyLanguage = (code: string) => {
-    setSelectedLanguage(code);
+    setLanguage(code);
     window.localStorage.setItem(STORAGE_KEY, code);
-    document.documentElement.lang = code;
   };
 
   return (
@@ -92,34 +85,34 @@ export default function LanguageSwitcher() {
         {open && (
           <div className="language-panel mb-3 w-[290px] max-w-[82vw] rounded-xl border p-3">
             <div className="mb-2 text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
-              Choose language
+              {t('lang.choose', 'Choose language')}
             </div>
             <input
               type="text"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search language..."
+              placeholder={t('lang.search', 'Search language...')}
               className="w-full rounded-md px-3 py-2 text-sm fancy-input"
             />
             <div className="mt-2 max-h-56 overflow-y-auto no-scrollbar space-y-1">
-              {filteredLanguages.map((language) => (
+              {filteredLanguages.map((item) => (
                 <button
-                  key={language.code}
+                  key={item.code}
                   type="button"
                   onClick={() => {
-                    applyLanguage(language.code);
+                    applyLanguage(item.code);
                     setOpen(false);
                   }}
                   className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
-                    selectedLanguage === language.code ? 'language-item-active' : 'language-item'
+                    language === item.code ? 'language-item-active' : 'language-item'
                   }`}
                 >
-                  {language.label}
+                  {item.label}
                 </button>
               ))}
               {filteredLanguages.length === 0 && (
                 <div className="px-2 py-2 text-sm" style={{ color: 'var(--text-muted)' }}>
-                  No language found.
+                  {t('lang.none', 'No language found.')}
                 </div>
               )}
             </div>
@@ -131,7 +124,7 @@ export default function LanguageSwitcher() {
           onClick={() => setOpen((current) => !current)}
           aria-label="Open language selector"
         >
-          🌐 Language
+          {t('lang.button', '🌐 Language')}
         </button>
       </div>
   );
