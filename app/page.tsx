@@ -188,9 +188,10 @@ export default function Home() {
         )}
         <>
           <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-xl sm:text-2xl md:text-3xl font-bold mb-4"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="fancy-headline-main text-2xl sm:text-4xl md:text-5xl font-bold mb-6"
           >
             {t('home.availableMeats', 'Available Meats')}
           </motion.h1>

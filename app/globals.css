@@ -380,6 +380,60 @@ html[data-theme='obsidian'] .fancy-button {
   background: linear-gradient(135deg, var(--accent-strong), var(--accent));
 }
 
+/* Fancy Animated Headline Styles */
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 10px color-mix(in srgb, var(--accent) 40%, transparent),
+                 0 0 20px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  50% {
+    text-shadow: 0 0 20px color-mix(in srgb, var(--accent) 60%, transparent),
+                 0 0 40px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.fancy-headline-main {
+  background: linear-gradient(
+    90deg,
+    var(--accent-strong),
+    var(--accent),
+    var(--accent-warm),
+    var(--accent)
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientFlow 4s ease infinite, glowPulse 2.5s ease-in-out infinite;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+  filter: drop-shadow(0 2px 4px color-mix(in srgb, var(--foreground) 8%, transparent));
+}
+
+html[data-theme-mode='dark'] .fancy-headline-main {
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--accent) 25%, transparent));
+}
+
 .goog-te-banner-frame.skiptranslate,
 iframe.goog-te-banner-frame,
 .goog-te-gadget,
