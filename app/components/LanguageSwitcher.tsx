@@ -169,9 +169,6 @@ export default function LanguageSwitcher() {
                     <motion.button
                       key={item.code}
                       type="button"
-                      initial={{ opacity: 0, x: -15, rotateZ: -2 }}
-                      animate={{ opacity: 1, x: 0, rotateZ: 0 }}
-                      transition={{ delay: 0.3 + idx * 0.025, type: 'spring', stiffness: 300, damping: 20 }}
                       onClick={() => {
                         applyLanguage(item.code);
                         setOpen(false);
