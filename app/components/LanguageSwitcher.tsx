@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from './TranslationProvider';
 
 type Language = {
@@ -82,8 +83,15 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="fixed bottom-4 right-4 z-[60]">
+        <AnimatePresence>
         {open && (
-          <div className="language-panel mb-3 w-[290px] max-w-[82vw] rounded-xl border p-3">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+            transition={{ duration: 0.3, type: 'spring', stiffness: 300, damping: 30 }}
+            className="language-panel mb-3 w-[290px] max-w-[82vw] rounded-xl border p-3"
+          >
             <div className="mb-2 text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
               {t('lang.choose', 'Choose language')}
             </div>
@@ -116,16 +124,21 @@ export default function LanguageSwitcher() {
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
         )}
-        <button
+        </AnimatePresence>
+        <motion.button
           type="button"
           className="language-fab h-12 min-w-12 rounded-full px-4 text-sm font-semibold"
           onClick={() => setOpen((current) => !current)}
           aria-label="Open language selector"
+          whileTap={{ scale: 0.95 }}
+          initial={{ scale: 1 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
         >
           {t('lang.button', '🌐 Language')}
-        </button>
+        </motion.button>
       </div>
   );
 }

@@ -334,50 +334,157 @@ html[data-theme='obsidian'] .fancy-button {
 }
 
 @keyframes languageFloat {
-  0% {
-    transform: translateY(0px);
+  0%, 100% {
+    transform: translateY(0px) rotateZ(0deg);
   }
   50% {
-    transform: translateY(-2px);
+    transform: translateY(-4px) rotateZ(1deg);
   }
-  100% {
-    transform: translateY(0px);
+}
+
+@keyframes languagePulse {
+  0%, 100% {
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 35%, transparent),
+                inset 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 50%, transparent),
+                inset 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+}
+
+@keyframes languageGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent) 0%, transparent));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 40%, transparent));
+  }
+}
+
+@keyframes panelSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes itemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
 .language-fab {
   background: linear-gradient(135deg, var(--accent-strong), var(--accent));
   color: #ffffff;
-  border: 1px solid color-mix(in srgb, var(--accent) 62%, transparent);
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 35%, transparent);
-  animation: languageFloat 3.2s ease-in-out infinite;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  border: 2px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 35%, transparent),
+              0 0 20px color-mix(in srgb, var(--accent) 20%, transparent);
+  animation: languageFloat 3.2s ease-in-out infinite, languagePulse 3.5s ease-in-out infinite, languageGlow 3s ease-in-out infinite;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+}
+
+.language-fab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.language-fab:hover::before {
+  left: 100%;
 }
 
 .language-fab:hover {
-  transform: translateY(-2px) scale(1.03);
-  filter: saturate(1.08);
-  box-shadow: 0 14px 30px color-mix(in srgb, var(--accent) 45%, transparent);
+  transform: translateY(-4px) scale(1.08);
+  filter: saturate(1.15) brightness(1.1);
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--accent) 50%, transparent),
+              0 0 30px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.language-fab:active {
+  transform: translateY(-2px) scale(1.05);
 }
 
 .language-panel {
-  background: linear-gradient(180deg, var(--card-bg), color-mix(in srgb, var(--card-bg) 90%, #ffffff));
-  border-color: var(--card-border);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+  background: linear-gradient(135deg, var(--card-bg) 0%, color-mix(in srgb, var(--card-bg) 95%, var(--foreground)) 100%);
+  border: 2px solid color-mix(in srgb, var(--card-border) 150%, var(--accent) 15%);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+              0 0 20px color-mix(in srgb, var(--accent) 15%, transparent);
+  animation: panelSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(8px);
+}
+
+.fancy-input {
+  background: color-mix(in srgb, var(--input-bg) 85%, var(--accent) 10%);
+  border: 1.5px solid color-mix(in srgb, var(--card-border) 150%, var(--accent) 20%);
+  color: var(--foreground);
+  transition: all 0.2s ease;
+}
+
+.fancy-input:focus {
+  outline: none;
+  background: color-mix(in srgb, var(--input-bg) 80%, var(--accent) 15%);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
 .language-item {
   color: var(--foreground);
-  background: color-mix(in srgb, var(--input-bg) 70%, transparent);
+  background: color-mix(in srgb, var(--input-bg) 60%, transparent);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  animation: itemFadeIn 0.3s ease-out backwards;
+  border-radius: 8px;
+}
+
+.language-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 20%, transparent), transparent);
+  transition: left 0.4s ease;
+}
+
+.language-item:hover::before {
+  left: 100%;
 }
 
 .language-item:hover {
-  background: color-mix(in srgb, var(--accent) 18%, var(--input-bg));
+  background: color-mix(in srgb, var(--accent) 25%, var(--input-bg));
+  transform: translateX(4px);
+  box-shadow: -4px 0 12px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .language-item-active {
   color: #ffffff;
   background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  transform: scale(1.02);
 }
 
 /* Fancy Animated Headline Styles */
