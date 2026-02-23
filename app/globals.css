@@ -556,3 +556,68 @@ body {
   top: 0 !important;
   position: static !important;
 }
+
+/* Fancy No Offers Text Hover Animations */
+@keyframes colorShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes textGlowEffect {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px color-mix(in srgb, var(--accent-warm) 30%, transparent))
+            drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 20%, transparent));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent-warm) 60%, transparent))
+            drop-shadow(0 0 16px color-mix(in srgb, var(--accent) 40%, transparent))
+            drop-shadow(0 0 24px color-mix(in srgb, var(--accent-strong) 25%, transparent));
+  }
+}
+
+@keyframes textWave {
+  0%, 100% {
+    transform: skewY(0deg);
+  }
+  50% {
+    transform: skewY(0.5deg);
+  }
+}
+
+.no-offers-text {
+  background-size: 200% 100%;
+  background-image: linear-gradient(
+    90deg,
+    var(--accent-strong),
+    var(--accent),
+    var(--accent-warm),
+    var(--accent),
+    var(--accent-strong)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.no-offers-text:hover {
+  animation: colorShift 1.5s ease-in-out infinite, textGlowEffect 2s ease-in-out infinite, textWave 1.2s ease-in-out infinite;
+  transform: scale(1.05);
+  letter-spacing: 0.08em;
+}
+
+html[data-theme-mode='dark'] .no-offers-text:hover {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent-warm) 40%, transparent))
+          drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 50%, transparent))
+          drop-shadow(0 0 28px color-mix(in srgb, var(--accent-strong) 35%, transparent));
+}

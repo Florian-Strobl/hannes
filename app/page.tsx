@@ -224,20 +224,13 @@ export default function Home() {
                 className="rounded-2xl border p-8 sm:p-12 text-center flex flex-col items-center justify-center min-h-[220px] w-full"
                 style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}
               >
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-                  className="text-3xl sm:text-4xl md:text-5xl font-black"
-                  style={{
-                    backgroundImage: 'linear-gradient(135deg, var(--accent-strong), var(--accent), var(--accent-warm))',
-                    WebkitBackgroundClip: 'text',
-                    color: 'transparent',
-                    textShadow: '0 6px 20px color-mix(in srgb, var(--accent) 35%, transparent)',
-                    letterSpacing: '0.04em',
-                  }}
+                <motion.h2
+                  animate={{ opacity: [0.8, 1, 0.8] }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                  className="no-offers-text text-3xl sm:text-4xl md:text-5xl font-black"
                 >
                   {t('home.noOffers', 'No offers yet')}
-                </motion.div>
+                </motion.h2>
                 <motion.p
                   animate={{ opacity: [0.6, 1, 0.6] }}
                   transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
