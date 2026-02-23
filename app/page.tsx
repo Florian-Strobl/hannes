@@ -30,6 +30,7 @@ export default function Home() {
   const [meats, setMeats] = useState<Meat[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [search, setSearch] = useState('');
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [loading, setLoading] = useState(true);
 
   const fetchMeats = async () => {
@@ -44,6 +45,13 @@ export default function Home() {
     const res = await fetch('/api/orders');
     const data = await res.json();
     setOrders(data);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setCursorPos({ x, y });
   };
 
   useEffect(() => {
@@ -216,7 +224,7 @@ export default function Home() {
             </div>
           )}
           {!hasMeats ? (
-            <div className="w-full min-h-[calc(100vh-260px)] flex items-center justify-center">
+            <div className="w-full min-h-[calc(100vh-260px)] flex items-center justify-center" onMouseMove={handleMouseMove}>
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -228,6 +236,10 @@ export default function Home() {
                   animate={{ opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
                   className="no-offers-text text-3xl sm:text-4xl md:text-5xl font-black"
+                  style={{
+                    '--cursor-x': `${cursorPos.x}px`,
+                    '--cursor-y': `${cursorPos.y}px`,
+                  } as React.CSSProperties & { '--cursor-x': string; '--cursor-y': string }}
                 >
                   {t('home.noOffers', 'No offers yet')}
                 </motion.h2>

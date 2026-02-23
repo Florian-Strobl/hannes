@@ -612,12 +612,27 @@ body {
 
 .no-offers-text:hover {
   animation: colorShift 1.5s ease-in-out infinite, textGlowEffect 2s ease-in-out infinite, textWave 1.2s ease-in-out infinite;
-  transform: scale(1.05);
-  letter-spacing: 0.08em;
+  background-image: 
+    radial-gradient(
+      circle 120px at var(--cursor-x) var(--cursor-y),
+      color-mix(in srgb, var(--accent-strong) 80%, var(--accent)),
+      var(--accent) 35%,
+      var(--accent-warm) 65%,
+      var(--accent) 100%
+    ),
+    linear-gradient(
+      90deg,
+      var(--accent-strong),
+      var(--accent),
+      var(--accent-warm),
+      var(--accent),
+      var(--accent-strong)
+    );
+  letter-spacing: 0.04em;
 }
 
 html[data-theme-mode='dark'] .no-offers-text:hover {
-  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent-warm) 40%, transparent))
-          drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 50%, transparent))
-          drop-shadow(0 0 28px color-mix(in srgb, var(--accent-strong) 35%, transparent));
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent-warm) 50%, transparent))
+          drop-shadow(0 0 16px color-mix(in srgb, var(--accent) 60%, transparent))
+          drop-shadow(0 0 32px color-mix(in srgb, var(--accent-strong) 40%, transparent));
 }
