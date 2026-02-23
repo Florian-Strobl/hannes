@@ -28,6 +28,7 @@ export default function Profile() {
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [hoveredTheme, setHoveredTheme] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -231,6 +232,8 @@ export default function Profile() {
                   onClick={() => setTheme('butcher')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'butcher' ? 'bg-orange-100 border-orange-400' : ''}`}
                   style={theme !== 'butcher' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  onHoverStart={() => setHoveredTheme('butcher')}
+                  onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -238,8 +241,7 @@ export default function Profile() {
                   <div className="font-semibold" style={{ color: theme === 'butcher' ? '#7c2d12' : 'var(--foreground)' }}>Butcher</div>
                   <div className="text-sm" style={{ color: theme === 'butcher' ? '#92400e' : 'var(--text-muted)' }}>Warm & rustic</div>
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    whileHover={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: hoveredTheme === 'butcher' ? 1 : 0, height: hoveredTheme === 'butcher' ? 'auto' : 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #ea580c, #dc2626, #f97316)', borderColor: 'rgba(0,0,0,0.1)' }}
@@ -250,6 +252,8 @@ export default function Profile() {
                   onClick={() => setTheme('forest')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'forest' ? 'bg-green-100 border-green-400' : ''}`}
                   style={theme !== 'forest' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  onHoverStart={() => setHoveredTheme('forest')}
+                  onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -257,8 +261,7 @@ export default function Profile() {
                   <div className="font-semibold" style={{ color: theme === 'forest' ? '#14532d' : 'var(--foreground)' }}>Forest</div>
                   <div className="text-sm" style={{ color: theme === 'forest' ? '#166534' : 'var(--text-muted)' }}>Fresh & earthy</div>
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    whileHover={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: hoveredTheme === 'forest' ? 1 : 0, height: hoveredTheme === 'forest' ? 'auto' : 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #14532d, #166534, #15803d)', borderColor: 'rgba(0,0,0,0.1)' }}
@@ -269,6 +272,8 @@ export default function Profile() {
                   onClick={() => setTheme('stone')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'stone' ? 'bg-blue-100 border-blue-400' : ''}`}
                   style={theme !== 'stone' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  onHoverStart={() => setHoveredTheme('stone')}
+                  onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -276,8 +281,7 @@ export default function Profile() {
                   <div className="font-semibold" style={{ color: theme === 'stone' ? '#1e3a8a' : 'var(--foreground)' }}>Stone</div>
                   <div className="text-sm" style={{ color: theme === 'stone' ? '#1e40af' : 'var(--text-muted)' }}>Cool & clean</div>
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    whileHover={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: hoveredTheme === 'stone' ? 1 : 0, height: hoveredTheme === 'stone' ? 'auto' : 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #1e3a8a, #1e40af, #2563eb)', borderColor: 'rgba(0,0,0,0.1)' }}
@@ -288,6 +292,8 @@ export default function Profile() {
                   onClick={() => setTheme('violet')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'violet' ? 'bg-purple-100 border-purple-400' : ''}`}
                   style={theme !== 'violet' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  onHoverStart={() => setHoveredTheme('violet')}
+                  onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -295,8 +301,7 @@ export default function Profile() {
                   <div className="font-semibold" style={{ color: theme === 'violet' ? '#6d28d9' : 'var(--foreground)' }}>Violet</div>
                   <div className="text-sm" style={{ color: theme === 'violet' ? '#7c3aed' : 'var(--text-muted)' }}>Lush & radiant</div>
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    whileHover={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: hoveredTheme === 'violet' ? 1 : 0, height: hoveredTheme === 'violet' ? 'auto' : 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #6d28d9, #7c3aed, #a855f7)', borderColor: 'rgba(0,0,0,0.1)' }}
@@ -307,6 +312,8 @@ export default function Profile() {
                   onClick={() => setTheme('midnight')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'midnight' ? 'bg-slate-900 border-violet-400' : ''}`}
                   style={theme !== 'midnight' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#e9e7ff' }}
+                  onHoverStart={() => setHoveredTheme('midnight')}
+                  onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -314,8 +321,7 @@ export default function Profile() {
                   <div className="font-semibold" style={{ color: theme === 'midnight' ? '#c4b5fd' : 'var(--foreground)' }}>Midnight</div>
                   <div className="text-sm" style={{ color: theme === 'midnight' ? '#a78bfa' : 'var(--text-muted)' }}>Noir & electric</div>
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    whileHover={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: hoveredTheme === 'midnight' ? 1 : 0, height: hoveredTheme === 'midnight' ? 'auto' : 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #1e293b, #475569, #a78bfa)', borderColor: 'rgba(0,0,0,0.1)' }}
@@ -326,6 +332,8 @@ export default function Profile() {
                   onClick={() => setTheme('obsidian')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'obsidian' ? 'bg-zinc-900 border-fuchsia-400' : ''}`}
                   style={theme !== 'obsidian' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#f0e7ff' }}
+                  onHoverStart={() => setHoveredTheme('obsidian')}
+                  onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -333,8 +341,7 @@ export default function Profile() {
                   <div className="font-semibold" style={{ color: theme === 'obsidian' ? '#d8b4fe' : 'var(--foreground)' }}>Obsidian</div>
                   <div className="text-sm" style={{ color: theme === 'obsidian' ? '#c084fc' : 'var(--text-muted)' }}>Ink & violet</div>
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    whileHover={{ opacity: 1, height: 'auto' }}
+                    animate={{ opacity: hoveredTheme === 'obsidian' ? 1 : 0, height: hoveredTheme === 'obsidian' ? 'auto' : 0 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #18181b, #3f3f46, #d946ef)', borderColor: 'rgba(0,0,0,0.1)' }}

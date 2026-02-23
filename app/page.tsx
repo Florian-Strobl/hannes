@@ -33,6 +33,7 @@ export default function Home() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [glowIntensity, setGlowIntensity] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [hoveredTheme, setHoveredTheme] = useState<string | null>(null);
 
   const fetchMeats = async () => {
     const res = await fetch('/api/meats');
@@ -144,70 +145,139 @@ export default function Home() {
                 <h2 className="text-base sm:text-lg font-semibold">Theme</h2>
                 <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Customize the look before you log in.</p>
               </div>
-              <button
+              <motion.button
                 type="button"
                 onClick={toggleMode}
                 className="px-3 py-1 rounded border text-sm"
                 style={{ backgroundColor: 'var(--input-bg)', borderColor: 'var(--card-border)', color: 'var(--foreground)' }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 {mode === 'dark' ? 'Dark' : 'Light'} Mode
-              </button>
+              </motion.button>
             </div>
             <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
-              <button
+              <motion.button
                 type="button"
                 onClick={() => setTheme('butcher')}
+                onHoverStart={() => setHoveredTheme('butcher')}
+                onHoverEnd={() => setHoveredTheme(null)}
                 className={`rounded p-2 text-left border ${theme === 'butcher' ? 'bg-orange-100 border-orange-400' : ''}`}
                 style={theme !== 'butcher' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <div className="font-semibold" style={{ color: theme === 'butcher' ? '#7c2d12' : 'var(--foreground)' }}>Butcher</div>
                 <div className="text-xs" style={{ color: theme === 'butcher' ? '#92400e' : 'var(--text-muted)' }}>Warm & rustic</div>
-              </button>
-              <button
+                <motion.div
+                  animate={{ opacity: hoveredTheme === 'butcher' ? 1 : 0, height: hoveredTheme === 'butcher' ? 'auto' : 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  className="mt-2 rounded-lg h-8 bg-gradient-to-r overflow-hidden border-2"
+                  style={{ backgroundImage: 'linear-gradient(to right, #ea580c, #dc2626, #f97316)', borderColor: 'rgba(0,0,0,0.1)' }}
+                />
+              </motion.button>
+              <motion.button
                 type="button"
                 onClick={() => setTheme('forest')}
+                onHoverStart={() => setHoveredTheme('forest')}
+                onHoverEnd={() => setHoveredTheme(null)}
                 className={`rounded p-2 text-left border ${theme === 'forest' ? 'bg-green-100 border-green-400' : ''}`}
                 style={theme !== 'forest' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <div className="font-semibold" style={{ color: theme === 'forest' ? '#14532d' : 'var(--foreground)' }}>Forest</div>
                 <div className="text-xs" style={{ color: theme === 'forest' ? '#166534' : 'var(--text-muted)' }}>Fresh & earthy</div>
-              </button>
-              <button
+                <motion.div
+                  animate={{ opacity: hoveredTheme === 'forest' ? 1 : 0, height: hoveredTheme === 'forest' ? 'auto' : 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  className="mt-2 rounded-lg h-8 bg-gradient-to-r overflow-hidden border-2"
+                  style={{ backgroundImage: 'linear-gradient(to right, #14532d, #166534, #15803d)', borderColor: 'rgba(0,0,0,0.1)' }}
+                />
+              </motion.button>
+              <motion.button
                 type="button"
                 onClick={() => setTheme('stone')}
+                onHoverStart={() => setHoveredTheme('stone')}
+                onHoverEnd={() => setHoveredTheme(null)}
                 className={`rounded p-2 text-left border ${theme === 'stone' ? 'bg-blue-100 border-blue-400' : ''}`}
                 style={theme !== 'stone' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <div className="font-semibold" style={{ color: theme === 'stone' ? '#1e3a8a' : 'var(--foreground)' }}>Stone</div>
                 <div className="text-xs" style={{ color: theme === 'stone' ? '#1e40af' : 'var(--text-muted)' }}>Cool & clean</div>
-              </button>
-              <button
+                <motion.div
+                  animate={{ opacity: hoveredTheme === 'stone' ? 1 : 0, height: hoveredTheme === 'stone' ? 'auto' : 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  className="mt-2 rounded-lg h-8 bg-gradient-to-r overflow-hidden border-2"
+                  style={{ backgroundImage: 'linear-gradient(to right, #1e3a8a, #1e40af, #2563eb)', borderColor: 'rgba(0,0,0,0.1)' }}
+                />
+              </motion.button>
+              <motion.button
                 type="button"
                 onClick={() => setTheme('violet')}
+                onHoverStart={() => setHoveredTheme('violet')}
+                onHoverEnd={() => setHoveredTheme(null)}
                 className={`rounded p-2 text-left border ${theme === 'violet' ? 'bg-purple-100 border-purple-400' : ''}`}
                 style={theme !== 'violet' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <div className="font-semibold" style={{ color: theme === 'violet' ? '#6d28d9' : 'var(--foreground)' }}>Violet</div>
                 <div className="text-xs" style={{ color: theme === 'violet' ? '#7c3aed' : 'var(--text-muted)' }}>Lush & radiant</div>
-              </button>
-              <button
+                <motion.div
+                  animate={{ opacity: hoveredTheme === 'violet' ? 1 : 0, height: hoveredTheme === 'violet' ? 'auto' : 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  className="mt-2 rounded-lg h-8 bg-gradient-to-r overflow-hidden border-2"
+                  style={{ backgroundImage: 'linear-gradient(to right, #6d28d9, #7c3aed, #a855f7)', borderColor: 'rgba(0,0,0,0.1)' }}
+                />
+              </motion.button>
+              <motion.button
                 type="button"
                 onClick={() => setTheme('midnight')}
+                onHoverStart={() => setHoveredTheme('midnight')}
+                onHoverEnd={() => setHoveredTheme(null)}
                 className={`rounded p-2 text-left border ${theme === 'midnight' ? 'bg-slate-900 border-violet-400' : ''}`}
                 style={theme !== 'midnight' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#e9e7ff' }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <div className="font-semibold" style={{ color: theme === 'midnight' ? '#c4b5fd' : 'var(--foreground)' }}>Midnight</div>
                 <div className="text-xs" style={{ color: theme === 'midnight' ? '#a78bfa' : 'var(--text-muted)' }}>Noir & electric</div>
-              </button>
-              <button
+                <motion.div
+                  animate={{ opacity: hoveredTheme === 'midnight' ? 1 : 0, height: hoveredTheme === 'midnight' ? 'auto' : 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  className="mt-2 rounded-lg h-8 bg-gradient-to-r overflow-hidden border-2"
+                  style={{ backgroundImage: 'linear-gradient(to right, #1e293b, #475569, #a78bfa)', borderColor: 'rgba(0,0,0,0.1)' }}
+                />
+              </motion.button>
+              <motion.button
                 type="button"
                 onClick={() => setTheme('obsidian')}
+                onHoverStart={() => setHoveredTheme('obsidian')}
+                onHoverEnd={() => setHoveredTheme(null)}
                 className={`rounded p-2 text-left border ${theme === 'obsidian' ? 'bg-zinc-900 border-fuchsia-400' : ''}`}
                 style={theme !== 'obsidian' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#f0e7ff' }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <div className="font-semibold" style={{ color: theme === 'obsidian' ? '#d8b4fe' : 'var(--foreground)' }}>Obsidian</div>
                 <div className="text-xs" style={{ color: theme === 'obsidian' ? '#c084fc' : 'var(--text-muted)' }}>Ink & violet</div>
-              </button>
+                <motion.div
+                  animate={{ opacity: hoveredTheme === 'obsidian' ? 1 : 0, height: hoveredTheme === 'obsidian' ? 'auto' : 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  className="mt-2 rounded-lg h-8 bg-gradient-to-r overflow-hidden border-2"
+                  style={{ backgroundImage: 'linear-gradient(to right, #18181b, #3f3f46, #d946ef)', borderColor: 'rgba(0,0,0,0.1)' }}
+                />
+              </motion.button>
             </div>
           </div>
         )}
