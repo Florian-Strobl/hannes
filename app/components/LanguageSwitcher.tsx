@@ -83,89 +83,91 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="fixed bottom-4 right-4 z-[60]">
-      <AnimatePresence>
-        {open ? (
-          <motion.div
-            key="panel"
-            initial={{ opacity: 0, scale: 0.4 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.4 }}
-            transition={{ duration: 0.35, type: 'spring', stiffness: 350, damping: 35 }}
-            className="language-panel w-[290px] max-w-[82vw] rounded-xl border p-3"
-            style={{ transformOrigin: 'bottom right' }}
-          >
-            <div className="mb-3 flex items-center justify-between">
-              <div className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
-                {t('lang.choose', 'Choose language')}
-              </div>
-              <motion.button
-                type="button"
-                onClick={() => {
-                  setOpen(false);
-                  setQuery('');
-                }}
-                className="close-language-btn h-6 w-6 rounded-md flex items-center justify-center transition-all"
-                style={{ backgroundColor: 'color-mix(in srgb, var(--input-bg) 80%, transparent)' }}
-                whileHover={{ backgroundColor: 'color-mix(in srgb, var(--accent) 20%, var(--input-bg))' }}
-                whileTap={{ scale: 0.9 }}
-                aria-label="Close language selector"
-              >
-                <span style={{ color: 'var(--text-muted)' }} className="text-lg leading-none">✕</span>
-              </motion.button>
-            </div>
-            <input
-              type="text"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder={t('lang.search', 'Search language...')}
-              className="w-full rounded-md px-3 py-2 text-sm fancy-input"
-              autoFocus
-            />
-            <div className="mt-2 max-h-56 overflow-y-auto no-scrollbar space-y-1">
-              {filteredLanguages.map((item, idx) => (
+      <div className="relative w-fit">
+        <AnimatePresence>
+          {open ? (
+            <motion.div
+              key="panel"
+              initial={{ opacity: 0, scale: 0.4 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.4 }}
+              transition={{ duration: 0.35, type: 'spring', stiffness: 350, damping: 35 }}
+              className="language-panel absolute bottom-0 right-0 w-[290px] max-w-[82vw] rounded-xl border p-3"
+              style={{ transformOrigin: 'bottom right' }}
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <div className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
+                  {t('lang.choose', 'Choose language')}
+                </div>
                 <motion.button
-                  key={item.code}
                   type="button"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.02 }}
                   onClick={() => {
-                    applyLanguage(item.code);
                     setOpen(false);
                     setQuery('');
                   }}
-                  className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
-                    language === item.code ? 'language-item-active' : 'language-item'
-                  }`}
+                  className="close-language-btn h-6 w-6 rounded-md flex items-center justify-center transition-all"
+                  style={{ backgroundColor: 'color-mix(in srgb, var(--input-bg) 80%, transparent)' }}
+                  whileHover={{ backgroundColor: 'color-mix(in srgb, var(--accent) 20%, var(--input-bg))' }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label="Close language selector"
                 >
-                  {item.label}
+                  <span style={{ color: 'var(--text-muted)' }} className="text-lg leading-none">✕</span>
                 </motion.button>
-              ))}
-              {filteredLanguages.length === 0 && (
-                <div className="px-2 py-2 text-sm" style={{ color: 'var(--text-muted)' }}>
-                  {t('lang.none', 'No language found.')}
-                </div>
-              )}
-            </div>
-          </motion.div>
-        ) : (
-          <motion.button
-            key="button"
-            type="button"
-            className="language-fab h-12 min-w-12 rounded-full px-4 text-sm font-semibold"
-            onClick={() => setOpen(true)}
-            aria-label="Open language selector"
-            initial={{ opacity: 0, scale: 0.4 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.4 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.35, type: 'spring', stiffness: 350, damping: 35 }}
-            style={{ transformOrigin: 'bottom right' }}
-          >
-            {t('lang.button', '🌐 Language')}
-          </motion.button>
-        )}
-      </AnimatePresence>
+              </div>
+              <input
+                type="text"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder={t('lang.search', 'Search language...')}
+                className="w-full rounded-md px-3 py-2 text-sm fancy-input"
+                autoFocus
+              />
+              <div className="mt-2 max-h-56 overflow-y-auto no-scrollbar space-y-1">
+                {filteredLanguages.map((item, idx) => (
+                  <motion.button
+                    key={item.code}
+                    type="button"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.02 }}
+                    onClick={() => {
+                      applyLanguage(item.code);
+                      setOpen(false);
+                      setQuery('');
+                    }}
+                    className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
+                      language === item.code ? 'language-item-active' : 'language-item'
+                    }`}
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
+                {filteredLanguages.length === 0 && (
+                  <div className="px-2 py-2 text-sm" style={{ color: 'var(--text-muted)' }}>
+                    {t('lang.none', 'No language found.')}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ) : (
+            <motion.button
+              key="button"
+              type="button"
+              className="language-fab absolute bottom-0 right-0 h-12 min-w-12 rounded-full px-4 text-sm font-semibold"
+              onClick={() => setOpen(true)}
+              aria-label="Open language selector"
+              initial={{ opacity: 0, scale: 0.4 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.4 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.35, type: 'spring', stiffness: 350, damping: 35 }}
+              style={{ transformOrigin: 'bottom right' }}
+            >
+              {t('lang.button', '🌐 Language')}
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
