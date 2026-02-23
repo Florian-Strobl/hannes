@@ -202,7 +202,7 @@ export default function Profile() {
       <Nav />
       <div className="container mx-auto p-2 sm:p-4 max-w-2xl">
         <div className="max-h-[calc(100vh-140px)] overflow-y-auto pr-2 no-scrollbar pb-6">
-          <h1 className="text-3xl font-bold mb-6">My Profile</h1>
+          <h1 className="text-3xl font-bold mb-6">{t('profile.title', 'My Profile')}</h1>
 
           {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4">{error}</div>}
           {success && <div className="bg-green-100 text-green-700 p-3 rounded mb-4">{success}</div>}
@@ -290,28 +290,28 @@ export default function Profile() {
                   />
                 ) : (
                   <div className="w-32 h-32 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: 'var(--bg-muted)' }}>
-                    <span style={{ color: 'var(--text-muted)' }}>No image</span>
+                    <span style={{ color: 'var(--text-muted)' }}>{t('profile.noImage', 'No image')}</span>
                   </div>
                 )}
               </div>
 
               <div className="space-y-3">
                 <div>
-                  <label className="font-semibold">Email:</label>
+                  <label className="font-semibold">{t('profile.email', 'Email')}:</label>
                   <p style={{ color: 'var(--text-normal)' }}>{profile.email}</p>
                 </div>
                 <div>
-                  <label className="font-semibold">Name:</label>
+                  <label className="font-semibold">{t('profile.name', 'Name')}:</label>
                   <p style={{ color: 'var(--text-normal)' }}>{profile.name}</p>
                 </div>
                 {profile.role === 'customer' && (
                   <div>
-                    <label className="font-semibold">Address:</label>
+                    <label className="font-semibold">{t('profile.address', 'Address')}:</label>
                     <p style={{ color: 'var(--text-normal)' }}>{profile.address}</p>
                   </div>
                 )}
                 <div>
-                  <label className="font-semibold">Role:</label>
+                  <label className="font-semibold">{t('profile.role', 'Role')}:</label>
                   <p className="capitalize" style={{ color: 'var(--text-normal)' }}>{profile.role === 'farmer' ? t('role.farmer', 'Farmer') : t('role.customer', 'Customer')}</p>
                 </div>
               </div>
@@ -320,14 +320,14 @@ export default function Profile() {
                 onClick={() => setEditing(true)}
                 className="mt-6 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
               >
-                Edit Profile
+                {t('profile.edit', 'Edit Profile')}
               </button>
             </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4 border rounded p-6">
             <div>
-              <label className="block font-semibold mb-2">Profile Picture</label>
+              <label className="block font-semibold mb-2">{t('profile.profilePicture', 'Profile Picture')}</label>
               <input
                 type="file"
                 accept="image/*"
@@ -346,7 +346,7 @@ export default function Profile() {
             </div>
 
             <div>
-              <label className="block font-semibold mb-2">Name</label>
+              <label className="block font-semibold mb-2">{t('profile.name', 'Name')}</label>
               <input
                 type="text"
                 value={formData.name}
@@ -357,7 +357,7 @@ export default function Profile() {
 
             {profile.role === 'customer' && (
               <div>
-                <label className="block font-semibold mb-2">Address</label>
+                <label className="block font-semibold mb-2">{t('profile.address', 'Address')}</label>
                 <input
                   type="text"
                   value={formData.address}
@@ -368,7 +368,7 @@ export default function Profile() {
             )}
 
             <div>
-              <label className="block font-semibold mb-2">New Password (leave blank to keep current)</label>
+              <label className="block font-semibold mb-2">{t('profile.newPassword', 'New Password (leave blank to keep current)')}</label>
               <input
                 type="password"
                 value={formData.password}
@@ -379,7 +379,7 @@ export default function Profile() {
 
             {formData.password && (
               <div>
-                <label className="block font-semibold mb-2">Confirm Password</label>
+                <label className="block font-semibold mb-2">{t('profile.confirmPassword', 'Confirm Password')}</label>
                 <input
                   type="password"
                   value={formData.confirmPassword}
@@ -392,7 +392,7 @@ export default function Profile() {
             {profile.role === 'farmer' && (
               <>
                 <div>
-                  <label className="block font-semibold mb-2">New PIN (leave blank to keep current)</label>
+                  <label className="block font-semibold mb-2">{t('profile.newPin', 'New PIN (leave blank to keep current)')}</label>
                   <input
                     type="password"
                     value={formData.pin}
@@ -404,7 +404,7 @@ export default function Profile() {
 
                 {formData.pin && (
                   <div>
-                    <label className="block font-semibold mb-2">Confirm PIN</label>
+                    <label className="block font-semibold mb-2">{t('profile.confirmPin', 'Confirm PIN')}</label>
                     <input
                       type="password"
                       value={formData.confirmPin}
@@ -422,7 +422,7 @@ export default function Profile() {
                 type="submit"
                 className="flex-1 bg-green-500 text-white p-2 rounded hover:bg-green-600"
               >
-                Save Changes
+                {t('profile.saveChanges', 'Save Changes')}
               </button>
               <button
                 type="button"
@@ -434,7 +434,7 @@ export default function Profile() {
                 }}
                 className="flex-1 bg-gray-500 text-white p-2 rounded hover:bg-gray-600"
               >
-                Cancel
+                {t('profile.cancel', 'Cancel')}
               </button>
             </div>
             </form>

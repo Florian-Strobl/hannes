@@ -3,8 +3,10 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Nav from '@/app/components/Nav';
+import { useTranslation } from '@/app/components/TranslationProvider';
 
 function ResetPasswordContent() {
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
   const router = useRouter();
   const token = searchParams.get('token');
@@ -46,17 +48,17 @@ function ResetPasswordContent() {
     setError('');
 
     if (!token || !email) {
-      setError('Invalid reset link');
+      setError(t('reset.invalidLink', 'Invalid reset link'));
       return;
     }
 
     if (value !== confirmValue) {
-      setError('Values do not match');
+      setError(t('reset.valuesMismatch', 'Values do not match'));
       return;
     }
 
     if (!value) {
-      setError(`${type === 'password' ? 'Password' : 'PIN'} is required`);
+      setError(type === 'password' ? t('reset.requiredPassword', 'Password is required') : t('reset.requiredPin', 'PIN is required'));
       return;
     }
 
@@ -79,7 +81,8 @@ function ResetPasswordContent() {
       const data = await res.json();
 
       if (res.ok) {
-        alert('Reset successful! You can now login with your new ' + (type === 'password' ? 'password' : 'PIN'));
+        const nextType = type === 'password' ? t('reset.passwordTab', 'password') : t('reset.pinTab', 'PIN');
+        alert(t('reset.success', 'Reset successful! You can now login with your new {type}.').replace('{type}', nextType));
         router.push('/login');
       } else {
         setError(data.error || 'Reset failed');
@@ -96,7 +99,7 @@ function ResetPasswordContent() {
       <div>
         <Nav />
         <div className="container mx-auto p-2 sm:p-4 max-w-full sm:max-w-md">
-          <div className="text-red-500">Invalid reset link</div>
+          <div className="text-red-500">{t('reset.invalidLink', 'Invalid reset link')}</div>
         </div>
       </div>
     );
@@ -106,7 +109,7 @@ function ResetPasswordContent() {
     <div>
       <Nav />
       <div className="container mx-auto p-2 sm:p-4 max-w-full sm:max-w-md">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>Reset Password/PIN</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4" style={{ color: 'var(--foreground)' }}>{t('reset.title', 'Reset Password/PIN')}</h1>
 
         <div className="mb-4 flex gap-4">
           <button
@@ -115,7 +118,7 @@ function ResetPasswordContent() {
             className={`flex-1 p-2 rounded ${type === 'password' ? 'bg-blue-500 text-white' : ''}`}
             style={type !== 'password' ? { backgroundColor: 'var(--bg-muted)', color: 'var(--foreground)' } : {}}
           >
-            Reset Password
+            {t('reset.passwordTab', 'Reset Password')}
           </button>
           {canResetPin && (
             <button
@@ -124,7 +127,7 @@ function ResetPasswordContent() {
               className={`flex-1 p-2 rounded ${type === 'pin' ? 'bg-blue-500 text-white' : ''}`}
               style={type !== 'pin' ? { backgroundColor: 'var(--bg-muted)', color: 'var(--foreground)' } : {}}
             >
-              Reset PIN
+              {t('reset.pinTab', 'Reset PIN')}
             </button>
           )}
         </div>
@@ -136,7 +139,7 @@ function ResetPasswordContent() {
             <>
               <input
                 type="password"
-                placeholder="New Password"
+                placeholder={t('reset.newPassword', 'New Password')}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 className="w-full p-2 border rounded"
@@ -145,7 +148,7 @@ function ResetPasswordContent() {
               />
               <input
                 type="password"
-                placeholder="Confirm Password"
+                placeholder={t('reset.confirmPassword', 'Confirm Password')}
                 value={confirmValue}
                 onChange={(e) => setConfirmValue(e.target.value)}
                 className="w-full p-2 border rounded"
@@ -157,7 +160,7 @@ function ResetPasswordContent() {
             <>
               <input
                 type="password"
-                placeholder="New 4-digit PIN"
+                placeholder={t('reset.newPin', 'New 4-digit PIN')}
                 value={value}
                 onChange={(e) => setValue(e.target.value.slice(0, 4))}
                 maxLength={4}
@@ -167,7 +170,7 @@ function ResetPasswordContent() {
               />
               <input
                 type="password"
-                placeholder="Confirm PIN"
+                placeholder={t('reset.confirmPin', 'Confirm PIN')}
                 value={confirmValue}
                 onChange={(e) => setConfirmValue(e.target.value.slice(0, 4))}
                 maxLength={4}
@@ -183,7 +186,7 @@ function ResetPasswordContent() {
             disabled={loading}
             className="w-full bg-blue-500 text-white p-2 rounded disabled:bg-gray-400"
           >
-            {loading ? 'Resetting...' : 'Reset'}
+            {loading ? t('reset.resetting', 'Resetting...') : t('reset.reset', 'Reset')}
           </button>
         </form>
       </div>
