@@ -83,14 +83,14 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="fixed bottom-4 right-4 z-[60]">
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {open ? (
           <motion.div
             key="panel"
             initial={{ opacity: 0, scale: 0.4 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.4 }}
-            transition={{ duration: 0.4, type: 'spring', stiffness: 350, damping: 35 }}
+            transition={{ duration: 0.35, type: 'spring', stiffness: 350, damping: 35 }}
             className="language-panel w-[290px] max-w-[82vw] rounded-xl border p-3"
             style={{ transformOrigin: 'bottom right' }}
           >
@@ -159,7 +159,7 @@ export default function LanguageSwitcher() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.4 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.4, type: 'spring', stiffness: 350, damping: 35 }}
+            transition={{ duration: 0.35, type: 'spring', stiffness: 350, damping: 35 }}
             style={{ transformOrigin: 'bottom right' }}
           >
             {t('lang.button', '🌐 Language')}
