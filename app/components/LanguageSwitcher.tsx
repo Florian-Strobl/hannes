@@ -87,10 +87,10 @@ export default function LanguageSwitcher() {
         {open ? (
           <motion.div
             key="panel"
-            initial={{ opacity: 0, scale: 0.85, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.85, y: 20 }}
-            transition={{ duration: 0.35, type: 'spring', stiffness: 280, damping: 28 }}
+            initial={{ opacity: 0, scale: 0.3, x: 80, y: 100 }}
+            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+            exit={{ opacity: 0, scale: 0.3, x: 80, y: 100 }}
+            transition={{ duration: 0.4, type: 'spring', stiffness: 300, damping: 25 }}
             className="language-panel w-[290px] max-w-[82vw] rounded-xl border p-3"
           >
             <div className="mb-3 flex items-center justify-between">
@@ -154,11 +154,11 @@ export default function LanguageSwitcher() {
             className="language-fab h-12 min-w-12 rounded-full px-4 text-sm font-semibold"
             onClick={() => setOpen(true)}
             aria-label="Open language selector"
-            initial={{ opacity: 0, scale: 0.85, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.85, y: 20 }}
+            initial={{ opacity: 0, scale: 0.3 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.3 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.35, type: 'spring', stiffness: 280, damping: 28 }}
+            transition={{ duration: 0.4, type: 'spring', stiffness: 300, damping: 25 }}
           >
             {t('lang.button', '🌐 Language')}
           </motion.button>
