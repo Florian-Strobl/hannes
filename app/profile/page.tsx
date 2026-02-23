@@ -241,8 +241,8 @@ export default function Profile() {
                     initial={{ opacity: 0, height: 0 }}
                     whileHover={{ opacity: 1, height: 'auto' }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    className="mt-2 rounded h-6 bg-gradient-to-r overflow-hidden"
-                    style={{ backgroundImage: 'linear-gradient(to right, #ea580c, #dc2626, #f97316)' }}
+                    className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
+                    style={{ backgroundImage: 'linear-gradient(to right, #ea580c, #dc2626, #f97316)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
                 </motion.button>
                 <motion.button
@@ -260,8 +260,8 @@ export default function Profile() {
                     initial={{ opacity: 0, height: 0 }}
                     whileHover={{ opacity: 1, height: 'auto' }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    className="mt-2 rounded h-6 bg-gradient-to-r overflow-hidden"
-                    style={{ backgroundImage: 'linear-gradient(to right, #14532d, #166534, #15803d)' }}
+                    className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
+                    style={{ backgroundImage: 'linear-gradient(to right, #14532d, #166534, #15803d)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
                 </motion.button>
                 <motion.button
@@ -279,8 +279,8 @@ export default function Profile() {
                     initial={{ opacity: 0, height: 0 }}
                     whileHover={{ opacity: 1, height: 'auto' }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    className="mt-2 rounded h-6 bg-gradient-to-r overflow-hidden"
-                    style={{ backgroundImage: 'linear-gradient(to right, #1e3a8a, #1e40af, #2563eb)' }}
+                    className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
+                    style={{ backgroundImage: 'linear-gradient(to right, #1e3a8a, #1e40af, #2563eb)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
                 </motion.button>
                 <motion.button
@@ -298,8 +298,8 @@ export default function Profile() {
                     initial={{ opacity: 0, height: 0 }}
                     whileHover={{ opacity: 1, height: 'auto' }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    className="mt-2 rounded h-6 bg-gradient-to-r overflow-hidden"
-                    style={{ backgroundImage: 'linear-gradient(to right, #6d28d9, #7c3aed, #a855f7)' }}
+                    className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
+                    style={{ backgroundImage: 'linear-gradient(to right, #6d28d9, #7c3aed, #a855f7)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
                 </motion.button>
                 <motion.button
@@ -317,8 +317,8 @@ export default function Profile() {
                     initial={{ opacity: 0, height: 0 }}
                     whileHover={{ opacity: 1, height: 'auto' }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    className="mt-2 rounded h-6 bg-gradient-to-r overflow-hidden"
-                    style={{ backgroundImage: 'linear-gradient(to right, #1e293b, #475569, #a78bfa)' }}
+                    className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
+                    style={{ backgroundImage: 'linear-gradient(to right, #1e293b, #475569, #a78bfa)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
                 </motion.button>
                 <motion.button
@@ -336,8 +336,8 @@ export default function Profile() {
                     initial={{ opacity: 0, height: 0 }}
                     whileHover={{ opacity: 1, height: 'auto' }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    className="mt-2 rounded h-6 bg-gradient-to-r overflow-hidden"
-                    style={{ backgroundImage: 'linear-gradient(to right, #18181b, #3f3f46, #d946ef)' }}
+                    className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
+                    style={{ backgroundImage: 'linear-gradient(to right, #18181b, #3f3f46, #d946ef)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
                 </motion.button>
               </div>
