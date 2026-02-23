@@ -230,8 +230,11 @@ export default function Profile() {
                 <motion.button
                   type="button"
                   onClick={() => setTheme('butcher')}
-                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'butcher' ? 'bg-orange-100 border-orange-400' : ''}`}
-                  style={theme !== 'butcher' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'butcher' ? 'border-orange-400' : ''}`}
+                  animate={{
+                    backgroundColor: hoveredTheme === 'butcher' || theme === 'butcher' ? (hoveredTheme === 'butcher' ? '#fff5f0' : 'rgb(254 237 226)') : 'var(--card-bg)',
+                    borderColor: hoveredTheme === 'butcher' || theme === 'butcher' ? '#fb923c' : 'var(--card-border)'
+                  }}
                   onHoverStart={() => setHoveredTheme('butcher')}
                   onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
@@ -250,8 +253,11 @@ export default function Profile() {
                 <motion.button
                   type="button"
                   onClick={() => setTheme('forest')}
-                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'forest' ? 'bg-green-100 border-green-400' : ''}`}
-                  style={theme !== 'forest' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'forest' ? 'border-green-400' : ''}`}
+                  animate={{
+                    backgroundColor: hoveredTheme === 'forest' || theme === 'forest' ? (hoveredTheme === 'forest' ? '#f0fdf4' : 'rgb(240 253 244)') : 'var(--card-bg)',
+                    borderColor: hoveredTheme === 'forest' || theme === 'forest' ? '#4ade80' : 'var(--card-border)'
+                  }}
                   onHoverStart={() => setHoveredTheme('forest')}
                   onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
@@ -270,8 +276,11 @@ export default function Profile() {
                 <motion.button
                   type="button"
                   onClick={() => setTheme('stone')}
-                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'stone' ? 'bg-blue-100 border-blue-400' : ''}`}
-                  style={theme !== 'stone' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'stone' ? 'border-blue-400' : ''}`}
+                  animate={{
+                    backgroundColor: hoveredTheme === 'stone' || theme === 'stone' ? (hoveredTheme === 'stone' ? '#f0f4ff' : 'rgb(240 244 255)') : 'var(--card-bg)',
+                    borderColor: hoveredTheme === 'stone' || theme === 'stone' ? '#60a5fa' : 'var(--card-border)'
+                  }}
                   onHoverStart={() => setHoveredTheme('stone')}
                   onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
@@ -290,8 +299,11 @@ export default function Profile() {
                 <motion.button
                   type="button"
                   onClick={() => setTheme('violet')}
-                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'violet' ? 'bg-purple-100 border-purple-400' : ''}`}
-                  style={theme !== 'violet' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'violet' ? 'border-purple-400' : ''}`}
+                  animate={{
+                    backgroundColor: hoveredTheme === 'violet' || theme === 'violet' ? (hoveredTheme === 'violet' ? '#faf5ff' : 'rgb(250 245 255)') : 'var(--card-bg)',
+                    borderColor: hoveredTheme === 'violet' || theme === 'violet' ? '#c084fc' : 'var(--card-border)'
+                  }}
                   onHoverStart={() => setHoveredTheme('violet')}
                   onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
@@ -310,8 +322,12 @@ export default function Profile() {
                 <motion.button
                   type="button"
                   onClick={() => setTheme('midnight')}
-                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'midnight' ? 'bg-slate-900 border-violet-400' : ''}`}
-                  style={theme !== 'midnight' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#e9e7ff' }}
+                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'midnight' ? 'border-violet-400' : ''}`}
+                  animate={{
+                    backgroundColor: hoveredTheme === 'midnight' || theme === 'midnight' ? (hoveredTheme === 'midnight' ? '#f3f0ff' : 'rgb(243 240 255)') : 'var(--card-bg)',
+                    borderColor: hoveredTheme === 'midnight' || theme === 'midnight' ? '#a78bfa' : 'var(--card-border)',
+                    color: theme === 'midnight' ? '#e9e7ff' : 'var(--foreground)'
+                  }}
                   onHoverStart={() => setHoveredTheme('midnight')}
                   onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
@@ -330,8 +346,12 @@ export default function Profile() {
                 <motion.button
                   type="button"
                   onClick={() => setTheme('obsidian')}
-                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'obsidian' ? 'bg-zinc-900 border-fuchsia-400' : ''}`}
-                  style={theme !== 'obsidian' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#f0e7ff' }}
+                  className={`rounded p-3 text-left border transition-all group relative ${theme === 'obsidian' ? 'border-fuchsia-400' : ''}`}
+                  animate={{
+                    backgroundColor: hoveredTheme === 'obsidian' || theme === 'obsidian' ? (hoveredTheme === 'obsidian' ? '#faf4ff' : 'rgb(250 244 255)') : 'var(--card-bg)',
+                    borderColor: hoveredTheme === 'obsidian' || theme === 'obsidian' ? '#ec4899' : 'var(--card-border)',
+                    color: theme === 'obsidian' ? '#f0e7ff' : 'var(--foreground)'
+                  }}
                   onHoverStart={() => setHoveredTheme('obsidian')}
                   onHoverEnd={() => setHoveredTheme(null)}
                   whileHover={{ scale: 1.05, y: -4 }}
