@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import Nav from '../components/Nav';
 import { useTranslation } from '../components/TranslationProvider';
 
@@ -138,22 +139,28 @@ export default function Login() {
         <h1 className="text-2xl sm:text-3xl font-bold mb-4">Login</h1>
         
         <div className="mb-4 flex gap-4">
-          <button
+          <motion.button
             type="button"
             onClick={() => setLoginType('password')}
-            className={`flex-1 p-2 rounded ${loginType === 'password' ? 'bg-blue-500 text-white' : ''}`}
+            className={`flex-1 p-2 rounded font-medium transition-colors duration-200 ${loginType === 'password' ? 'bg-blue-500 text-white' : ''}`}
             style={loginType !== 'password' ? { backgroundColor: 'var(--bg-muted)', color: 'var(--foreground)' } : {}}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 16 }}
           >
             {t('role.customer', 'Customer')}
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             type="button"
             onClick={() => setLoginType('pin')}
-            className={`flex-1 p-2 rounded ${loginType === 'pin' ? 'bg-blue-500 text-white' : ''}`}
+            className={`flex-1 p-2 rounded font-medium transition-colors duration-200 ${loginType === 'pin' ? 'bg-blue-500 text-white' : ''}`}
             style={loginType !== 'pin' ? { backgroundColor: 'var(--bg-muted)', color: 'var(--foreground)' } : {}}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 16 }}
           >
             {t('role.farmer', 'Farmer')}
-          </button>
+          </motion.button>
         </div>
 
         {loginError && <div className="bg-red-100 text-red-700 p-3 rounded mb-4">{loginError}</div>}
@@ -189,17 +196,27 @@ export default function Login() {
             />
           )}
           
-          <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
+          <motion.button
+            type="submit"
+            className="w-full bg-blue-500 text-white p-2 rounded font-medium"
+            whileHover={{ backgroundColor: '#2563eb', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.4)' }}
+            whileTap={{ scale: 0.96, backgroundColor: '#1d4ed8' }}
+            transition={{ type: 'spring', stiffness: 400, damping: 16 }}
+          >
             Login
-          </button>
+          </motion.button>
         </form>
 
-        <button
+        <motion.button
+          type="button"
           onClick={() => setShowForgot(true)}
-          className="w-full mt-4 text-blue-500 hover:underline text-sm"
+          className="w-full mt-4 text-blue-500 hover:text-blue-600 underline text-sm font-medium transition-colors duration-200"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 16 }}
         >
           {t('forgot.link', 'Forgot {type}?').replace('{type}', forgotType)}
-        </button>
+        </motion.button>
       </div>
 
       {/* Forgot Password/PIN Modal */}
@@ -226,14 +243,17 @@ export default function Login() {
                   required
                 />
                 <div className="flex gap-2">
-                  <button
+                  <motion.button
                     type="submit"
                     disabled={forgotLoading}
-                    className="flex-1 bg-blue-500 text-white p-2 rounded disabled:bg-gray-400"
+                    className="flex-1 bg-blue-500 text-white p-2 rounded font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    whileHover={!forgotLoading ? { backgroundColor: '#2563eb', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.4)' } : {}}
+                    whileTap={!forgotLoading ? { scale: 0.96, backgroundColor: '#1d4ed8' } : {}}
+                    transition={{ type: 'spring', stiffness: 400, damping: 16 }}
                   >
                     {forgotLoading ? t('forgot.sending', 'Sending...') : t('forgot.sendCode', 'Send Code')}
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
                     type="button"
                     onClick={() => {
                       setShowForgot(false);
@@ -243,10 +263,13 @@ export default function Login() {
                       setVerificationStep(false);
                       setVerificationCode('');
                     }}
-                    className="flex-1 bg-gray-500 text-white p-2 rounded"
+                    className="flex-1 bg-gray-500 text-white p-2 rounded font-medium"
+                    whileHover={{ backgroundColor: '#6b7280', boxShadow: '0 4px 12px rgba(107, 114, 128, 0.4)' }}
+                    whileTap={{ scale: 0.96, backgroundColor: '#4b5563' }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 16 }}
                   >
                     {t('forgot.cancel', 'Cancel')}
-                  </button>
+                  </motion.button>
                 </div>
               </form>
             ) : verificationStep ? (
@@ -265,14 +288,17 @@ export default function Login() {
                   required
                 />
                 <div className="flex gap-2">
-                  <button
+                  <motion.button
                     type="submit"
                     disabled={verifyLoading}
-                    className="flex-1 bg-green-600 text-white p-2 rounded disabled:bg-gray-400"
+                    className="flex-1 bg-green-600 text-white p-2 rounded font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    whileHover={!verifyLoading ? { backgroundColor: '#16a34a', boxShadow: '0 4px 12px rgba(22, 163, 74, 0.4)' } : {}}
+                    whileTap={!verifyLoading ? { scale: 0.96, backgroundColor: '#15803d' } : {}}
+                    transition={{ type: 'spring', stiffness: 400, damping: 16 }}
                   >
                     {verifyLoading ? t('forgot.verifying', 'Verifying...') : t('forgot.verifyCode', 'Verify Code')}
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
                     type="button"
                     onClick={() => {
                       setVerificationStep(false);
@@ -280,10 +306,13 @@ export default function Login() {
                       setForgotMessage('');
                       setForgotError('');
                     }}
-                    className="flex-1 bg-gray-500 text-white p-2 rounded"
+                    className="flex-1 bg-gray-500 text-white p-2 rounded font-medium"
+                    whileHover={{ backgroundColor: '#6b7280', boxShadow: '0 4px 12px rgba(107, 114, 128, 0.4)' }}
+                    whileTap={{ scale: 0.96, backgroundColor: '#4b5563' }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 16 }}
                   >
                     {t('forgot.back', 'Back')}
-                  </button>
+                  </motion.button>
                 </div>
               </form>
             ) : (

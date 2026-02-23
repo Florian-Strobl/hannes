@@ -3,6 +3,7 @@
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useTranslation } from './TranslationProvider';
 
 export default function Nav() {
@@ -54,12 +55,24 @@ export default function Nav() {
             </>
           ) : (
             <>
-              <Link href="/login" className="bg-blue-500 px-2 sm:px-3 py-1 rounded text-white text-sm sm:text-base hover:bg-blue-600">
-                {t('nav.login', 'Login')}
-              </Link>
-              <Link href="/register" className="bg-gray-500 px-2 sm:px-3 py-1 rounded text-white text-sm sm:text-base hover:bg-gray-600">
-                {t('nav.register', 'Register')}
-              </Link>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.92 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 16 }}
+              >
+                <Link href="/login" className="inline-block bg-blue-500 px-2 sm:px-3 py-1 rounded text-white text-sm sm:text-base hover:bg-blue-600 transition-colors duration-200">
+                  {t('nav.login', 'Login')}
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.92 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 16 }}
+              >
+                <Link href="/register" className="inline-block bg-gray-500 px-2 sm:px-3 py-1 rounded text-white text-sm sm:text-base hover:bg-gray-600 transition-colors duration-200">
+                  {t('nav.register', 'Register')}
+                </Link>
+              </motion.div>
             </>
           )}
         </div>
@@ -99,18 +112,30 @@ export default function Nav() {
             </>
           ) : (
             <>
-              <Link 
-                href="/login" 
-                className="block px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95 text-center"
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 16 }}
               >
-                🔑 {t('nav.login', 'Login')}
-              </Link>
-              <Link 
-                href="/register" 
-                className="block px-4 py-3 bg-purple-500 hover:bg-purple-600 text-white rounded-lg text-sm font-medium shadow-md transition transform hover:scale-105 active:scale-95 text-center"
+                <Link 
+                  href="/login" 
+                  className="block px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium shadow-md transition-colors duration-200 text-center"
+                >
+                  🔑 {t('nav.login', 'Login')}
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 16 }}
               >
-                ✍️ {t('nav.register', 'Register')}
-              </Link>
+                <Link 
+                  href="/register" 
+                  className="block px-4 py-3 bg-purple-500 hover:bg-purple-600 text-white rounded-lg text-sm font-medium shadow-md transition-colors duration-200 text-center"
+                >
+                  ✍️ {t('nav.register', 'Register')}
+                </Link>
+              </motion.div>
             </>
           )}
         </div>

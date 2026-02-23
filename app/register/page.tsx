@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import Nav from '../components/Nav';
 import { useTranslation } from '../components/TranslationProvider';
 
@@ -116,9 +117,16 @@ export default function Register() {
               required
             />
           )}
-          <button type="submit" disabled={loading} className="w-full bg-blue-500 text-white p-2 rounded disabled:bg-gray-400">
+          <motion.button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-blue-500 text-white p-2 rounded font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
+            whileHover={!loading ? { backgroundColor: '#2563eb', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.4)' } : {}}
+            whileTap={!loading ? { scale: 0.96, backgroundColor: '#1d4ed8' } : {}}
+            transition={{ type: 'spring', stiffness: 400, damping: 16 }}
+          >
             {loading ? 'Registering...' : 'Register'}
-          </button>
+          </motion.button>
         </form>
       </div>
     </div>
