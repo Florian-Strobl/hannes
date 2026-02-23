@@ -241,11 +241,27 @@ export default function Profile() {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  <div className="font-semibold" style={{ color: theme === 'butcher' ? '#7c2d12' : 'var(--foreground)' }}>Butcher</div>
-                  <div className="text-sm" style={{ color: theme === 'butcher' ? '#92400e' : 'var(--text-muted)' }}>Warm & rustic</div>
+                  <motion.div
+                    className="font-semibold"
+                    animate={{
+                      color: hoveredTheme === 'butcher' ? '#ea580c' : (theme === 'butcher' ? '#7c2d12' : 'var(--foreground)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Butcher
+                  </motion.div>
+                  <motion.div
+                    className="text-sm"
+                    animate={{
+                      color: hoveredTheme === 'butcher' ? '#dc2622' : (theme === 'butcher' ? '#92400e' : 'var(--text-muted)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Warm & rustic
+                  </motion.div>
                   <motion.div
                     animate={{ opacity: hoveredTheme === 'butcher' ? 1 : 0, height: hoveredTheme === 'butcher' ? 'auto' : 0 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #ea580c, #dc2626, #f97316)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
@@ -264,11 +280,27 @@ export default function Profile() {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  <div className="font-semibold" style={{ color: theme === 'forest' ? '#14532d' : 'var(--foreground)' }}>Forest</div>
-                  <div className="text-sm" style={{ color: theme === 'forest' ? '#166534' : 'var(--text-muted)' }}>Fresh & earthy</div>
+                  <motion.div
+                    className="font-semibold"
+                    animate={{
+                      color: hoveredTheme === 'forest' ? '#15803d' : (theme === 'forest' ? '#14532d' : 'var(--foreground)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Forest
+                  </motion.div>
+                  <motion.div
+                    className="text-sm"
+                    animate={{
+                      color: hoveredTheme === 'forest' ? '#166534' : (theme === 'forest' ? '#166534' : 'var(--text-muted)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Fresh & earthy
+                  </motion.div>
                   <motion.div
                     animate={{ opacity: hoveredTheme === 'forest' ? 1 : 0, height: hoveredTheme === 'forest' ? 'auto' : 0 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #14532d, #166534, #15803d)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
@@ -287,11 +319,27 @@ export default function Profile() {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  <div className="font-semibold" style={{ color: theme === 'stone' ? '#1e3a8a' : 'var(--foreground)' }}>Stone</div>
-                  <div className="text-sm" style={{ color: theme === 'stone' ? '#1e40af' : 'var(--text-muted)' }}>Cool & clean</div>
+                  <motion.div
+                    className="font-semibold"
+                    animate={{
+                      color: hoveredTheme === 'stone' ? '#2563eb' : (theme === 'stone' ? '#1e3a8a' : 'var(--foreground)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Stone
+                  </motion.div>
+                  <motion.div
+                    className="text-sm"
+                    animate={{
+                      color: hoveredTheme === 'stone' ? '#1e40af' : (theme === 'stone' ? '#1e40af' : 'var(--text-muted)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Cool & clean
+                  </motion.div>
                   <motion.div
                     animate={{ opacity: hoveredTheme === 'stone' ? 1 : 0, height: hoveredTheme === 'stone' ? 'auto' : 0 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #1e3a8a, #1e40af, #2563eb)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
@@ -310,11 +358,27 @@ export default function Profile() {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  <div className="font-semibold" style={{ color: theme === 'violet' ? '#6d28d9' : 'var(--foreground)' }}>Violet</div>
-                  <div className="text-sm" style={{ color: theme === 'violet' ? '#7c3aed' : 'var(--text-muted)' }}>Lush & radiant</div>
+                  <motion.div
+                    className="font-semibold"
+                    animate={{
+                      color: hoveredTheme === 'violet' ? '#a855f7' : (theme === 'violet' ? '#6d28d9' : 'var(--foreground)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Violet
+                  </motion.div>
+                  <motion.div
+                    className="text-sm"
+                    animate={{
+                      color: hoveredTheme === 'violet' ? '#7c3aed' : (theme === 'violet' ? '#7c3aed' : 'var(--text-muted)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Lush & radiant
+                  </motion.div>
                   <motion.div
                     animate={{ opacity: hoveredTheme === 'violet' ? 1 : 0, height: hoveredTheme === 'violet' ? 'auto' : 0 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #6d28d9, #7c3aed, #a855f7)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
@@ -334,11 +398,27 @@ export default function Profile() {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  <div className="font-semibold" style={{ color: theme === 'midnight' ? '#c4b5fd' : 'var(--foreground)' }}>Midnight</div>
-                  <div className="text-sm" style={{ color: theme === 'midnight' ? '#a78bfa' : 'var(--text-muted)' }}>Noir & electric</div>
+                  <motion.div
+                    className="font-semibold"
+                    animate={{
+                      color: hoveredTheme === 'midnight' ? '#cffafe' : (theme === 'midnight' ? '#c4b5fd' : 'var(--foreground)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Midnight
+                  </motion.div>
+                  <motion.div
+                    className="text-sm"
+                    animate={{
+                      color: hoveredTheme === 'midnight' ? '#a78bfa' : (theme === 'midnight' ? '#a78bfa' : 'var(--text-muted)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Noir & electric
+                  </motion.div>
                   <motion.div
                     animate={{ opacity: hoveredTheme === 'midnight' ? 1 : 0, height: hoveredTheme === 'midnight' ? 'auto' : 0 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #1e293b, #475569, #a78bfa)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
@@ -358,11 +438,27 @@ export default function Profile() {
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  <div className="font-semibold" style={{ color: theme === 'obsidian' ? '#d8b4fe' : 'var(--foreground)' }}>Obsidian</div>
-                  <div className="text-sm" style={{ color: theme === 'obsidian' ? '#c084fc' : 'var(--text-muted)' }}>Ink & violet</div>
+                  <motion.div
+                    className="font-semibold"
+                    animate={{
+                      color: hoveredTheme === 'obsidian' ? '#d946ef' : (theme === 'obsidian' ? '#d8b4fe' : 'var(--foreground)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Obsidian
+                  </motion.div>
+                  <motion.div
+                    className="text-sm"
+                    animate={{
+                      color: hoveredTheme === 'obsidian' ? '#c084fc' : (theme === 'obsidian' ? '#c084fc' : 'var(--text-muted)')
+                    }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  >
+                    Ink & violet
+                  </motion.div>
                   <motion.div
                     animate={{ opacity: hoveredTheme === 'obsidian' ? 1 : 0, height: hoveredTheme === 'obsidian' ? 'auto' : 0 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="mt-3 rounded-lg h-12 bg-gradient-to-r overflow-hidden border-2"
                     style={{ backgroundImage: 'linear-gradient(to right, #18181b, #3f3f46, #d946ef)', borderColor: 'rgba(0,0,0,0.1)' }}
                   />
