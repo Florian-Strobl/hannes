@@ -35,6 +35,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'User already exists' }, { status: 400 });
     }
 
+    // Check if trying to register as farmer when one already exists
+    if (role === 'farmer') {
+      const existingFarmer = await prisma.user.findFirst({
+        where: { role: 'farmer' },
+      });
+
+      if (existingFarmer) {
+        return NextResponse.json({ error: 'A farmer account already exists. Only one farmer can be registered.', details: 'The farmer must delete their account before a new farmer can sign up.' }, { status: 400 });
+      }
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await prisma.user.create({
