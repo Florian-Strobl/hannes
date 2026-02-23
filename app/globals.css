@@ -332,3 +332,60 @@ html[data-theme='midnight'] .fancy-button,
 html[data-theme='obsidian'] .fancy-button {
   animation: themePulse 6s ease-in-out infinite;
 }
+
+@keyframes languageFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.language-fab {
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  color: #ffffff;
+  border: 1px solid color-mix(in srgb, var(--accent) 62%, transparent);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 35%, transparent);
+  animation: languageFloat 3.2s ease-in-out infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.language-fab:hover {
+  transform: translateY(-2px) scale(1.03);
+  filter: saturate(1.08);
+  box-shadow: 0 14px 30px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.language-panel {
+  background: linear-gradient(180deg, var(--card-bg), color-mix(in srgb, var(--card-bg) 90%, #ffffff));
+  border-color: var(--card-border);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+}
+
+.language-item {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--input-bg) 70%, transparent);
+}
+
+.language-item:hover {
+  background: color-mix(in srgb, var(--accent) 18%, var(--input-bg));
+}
+
+.language-item-active {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+}
+
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget,
+.goog-logo-link {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
