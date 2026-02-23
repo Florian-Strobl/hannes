@@ -136,7 +136,7 @@ export default function Register() {
           >
             <option value="customer" style={{ backgroundColor: 'var(--input-bg)', color: 'var(--foreground)' }}>{t('role.customer', 'Customer')}</option>
             <option value="farmer" disabled={farmerExists} style={{ backgroundColor: 'var(--input-bg)', color: farmerExists ? '#999' : 'var(--foreground)' }}>
-              {farmerExists ? `❌ ${t('role.farmer', 'Farmer')} (Not Available)` : t('role.farmer', 'Farmer')}
+              {farmerExists ? `❌ ${t('role.farmer', 'Farmer')} (${t('common.notAvailable', 'Not Available')})` : t('role.farmer', 'Farmer')}
             </option>
           </select>
           {farmerExists && form.role !== 'farmer' && (
