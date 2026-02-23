@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import Nav from '../components/Nav';
 import { useTheme } from '../components/ThemeProvider';
 import { useTranslation } from '../components/TranslationProvider';
@@ -212,70 +213,91 @@ export default function Profile() {
             <div className="border rounded p-6">
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-xl font-semibold">{t('profile.theme', 'Theme')}</h2>
-                <button
+                <motion.button
                   type="button"
                   onClick={toggleMode}
-                  className="px-3 py-1 rounded border"
+                  className="px-3 py-1 rounded border transition-all"
                   style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)', color: 'var(--foreground)' }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   {mode === 'dark' ? t('profile.dark', 'Dark') : t('profile.light', 'Light')} {t('profile.mode', 'Mode')}
-                </button>
+                </motion.button>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-                <button
+                <motion.button
                   type="button"
                   onClick={() => setTheme('butcher')}
-                  className={`rounded p-3 text-left border ${theme === 'butcher' ? 'bg-orange-100 border-orange-400' : ''}`}
+                  className={`rounded p-3 text-left border transition-all ${theme === 'butcher' ? 'bg-orange-100 border-orange-400' : ''}`}
                   style={theme !== 'butcher' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   <div className="font-semibold" style={{ color: theme === 'butcher' ? '#7c2d12' : 'var(--foreground)' }}>Butcher</div>
                   <div className="text-sm" style={{ color: theme === 'butcher' ? '#92400e' : 'var(--text-muted)' }}>Warm & rustic</div>
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   type="button"
                   onClick={() => setTheme('forest')}
-                  className={`rounded p-3 text-left border ${theme === 'forest' ? 'bg-green-100 border-green-400' : ''}`}
+                  className={`rounded p-3 text-left border transition-all ${theme === 'forest' ? 'bg-green-100 border-green-400' : ''}`}
                   style={theme !== 'forest' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   <div className="font-semibold" style={{ color: theme === 'forest' ? '#14532d' : 'var(--foreground)' }}>Forest</div>
                   <div className="text-sm" style={{ color: theme === 'forest' ? '#166534' : 'var(--text-muted)' }}>Fresh & earthy</div>
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   type="button"
                   onClick={() => setTheme('stone')}
-                  className={`rounded p-3 text-left border ${theme === 'stone' ? 'bg-blue-100 border-blue-400' : ''}`}
+                  className={`rounded p-3 text-left border transition-all ${theme === 'stone' ? 'bg-blue-100 border-blue-400' : ''}`}
                   style={theme !== 'stone' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   <div className="font-semibold" style={{ color: theme === 'stone' ? '#1e3a8a' : 'var(--foreground)' }}>Stone</div>
                   <div className="text-sm" style={{ color: theme === 'stone' ? '#1e40af' : 'var(--text-muted)' }}>Cool & clean</div>
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   type="button"
                   onClick={() => setTheme('violet')}
-                  className={`rounded p-3 text-left border ${theme === 'violet' ? 'bg-purple-100 border-purple-400' : ''}`}
+                  className={`rounded p-3 text-left border transition-all ${theme === 'violet' ? 'bg-purple-100 border-purple-400' : ''}`}
                   style={theme !== 'violet' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : {}}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   <div className="font-semibold" style={{ color: theme === 'violet' ? '#6d28d9' : 'var(--foreground)' }}>Violet</div>
                   <div className="text-sm" style={{ color: theme === 'violet' ? '#7c3aed' : 'var(--text-muted)' }}>Lush & radiant</div>
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   type="button"
                   onClick={() => setTheme('midnight')}
-                  className={`rounded p-3 text-left border ${theme === 'midnight' ? 'bg-slate-900 border-violet-400' : ''}`}
+                  className={`rounded p-3 text-left border transition-all ${theme === 'midnight' ? 'bg-slate-900 border-violet-400' : ''}`}
                   style={theme !== 'midnight' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#e9e7ff' }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   <div className="font-semibold" style={{ color: theme === 'midnight' ? '#c4b5fd' : 'var(--foreground)' }}>Midnight</div>
                   <div className="text-sm" style={{ color: theme === 'midnight' ? '#a78bfa' : 'var(--text-muted)' }}>Noir & electric</div>
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   type="button"
                   onClick={() => setTheme('obsidian')}
-                  className={`rounded p-3 text-left border ${theme === 'obsidian' ? 'bg-zinc-900 border-fuchsia-400' : ''}`}
+                  className={`rounded p-3 text-left border transition-all ${theme === 'obsidian' ? 'bg-zinc-900 border-fuchsia-400' : ''}`}
                   style={theme !== 'obsidian' ? { backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' } : { color: '#f0e7ff' }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
                   <div className="font-semibold" style={{ color: theme === 'obsidian' ? '#d8b4fe' : 'var(--foreground)' }}>Obsidian</div>
                   <div className="text-sm" style={{ color: theme === 'obsidian' ? '#c084fc' : 'var(--text-muted)' }}>Ink & violet</div>
-                </button>
+                </motion.button>
               </div>
             </div>
             <div className="border rounded p-6">
