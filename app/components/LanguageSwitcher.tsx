@@ -88,66 +88,100 @@ export default function LanguageSwitcher() {
           {open ? (
             <motion.div
               key="panel"
-              initial={{ opacity: 0, scale: 0.4 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.4 }}
-              transition={{ duration: 0.35, type: 'spring', stiffness: 350, damping: 35 }}
-              className="language-panel absolute bottom-0 right-0 w-[290px] max-w-[82vw] rounded-xl border p-3"
-              style={{ transformOrigin: 'bottom right' }}
+              initial={{ 
+                opacity: 0, 
+                width: 48,
+                height: 48,
+                borderRadius: '9999px'
+              }}
+              animate={{ 
+                opacity: 1, 
+                width: 290,
+                height: 'auto',
+                borderRadius: '12px'
+              }}
+              exit={{ 
+                opacity: 0, 
+                width: 48,
+                height: 48,
+                borderRadius: '9999px'
+              }}
+              transition={{ 
+                duration: 0.4, 
+                type: 'spring', 
+                stiffness: 300, 
+                damping: 30,
+                width: { duration: 0.4, type: 'spring', stiffness: 300, damping: 30 },
+                height: { duration: 0.4, type: 'spring', stiffness: 300, damping: 30 },
+                borderRadius: { duration: 0.4, type: 'spring', stiffness: 300, damping: 30 }
+              }}
+              className="language-panel absolute bottom-0 right-0 border p-3 overflow-hidden"
+              style={{ 
+                transformOrigin: 'bottom right',
+                backgroundColor: 'var(--card-bg)',
+                borderColor: 'var(--card-border)'
+              }}
             >
-              <div className="mb-3 flex items-center justify-between">
-                <div className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
-                  {t('lang.choose', 'Choose language')}
-                </div>
-                <motion.button
-                  type="button"
-                  onClick={() => {
-                    setOpen(false);
-                    setQuery('');
-                  }}
-                  className="close-language-btn h-6 w-6 rounded-md flex items-center justify-center transition-all"
-                  style={{ backgroundColor: 'color-mix(in srgb, var(--input-bg) 80%, transparent)' }}
-                  whileHover={{ backgroundColor: 'color-mix(in srgb, var(--accent) 20%, var(--input-bg))' }}
-                  whileTap={{ scale: 0.9 }}
-                  aria-label="Close language selector"
-                >
-                  <span style={{ color: 'var(--text-muted)' }} className="text-lg leading-none">✕</span>
-                </motion.button>
-              </div>
-              <input
-                type="text"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder={t('lang.search', 'Search language...')}
-                className="w-full rounded-md px-3 py-2 text-sm fancy-input"
-                autoFocus
-              />
-              <div className="mt-2 max-h-56 overflow-y-auto no-scrollbar space-y-1">
-                {filteredLanguages.map((item, idx) => (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: 0.2, duration: 0.2 }}
+              >
+                <div className="mb-3 flex items-center justify-between">
+                  <div className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
+                    {t('lang.choose', 'Choose language')}
+                  </div>
                   <motion.button
-                    key={item.code}
                     type="button"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.02 }}
                     onClick={() => {
-                      applyLanguage(item.code);
                       setOpen(false);
                       setQuery('');
                     }}
-                    className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
-                      language === item.code ? 'language-item-active' : 'language-item'
-                    }`}
+                    className="close-language-btn h-6 w-6 rounded-md flex items-center justify-center transition-all"
+                    style={{ backgroundColor: 'color-mix(in srgb, var(--input-bg) 80%, transparent)' }}
+                    whileHover={{ backgroundColor: 'color-mix(in srgb, var(--accent) 20%, var(--input-bg))' }}
+                    whileTap={{ scale: 0.9 }}
+                    aria-label="Close language selector"
                   >
-                    {item.label}
+                    <span style={{ color: 'var(--text-muted)' }} className="text-lg leading-none">✕</span>
                   </motion.button>
-                ))}
-                {filteredLanguages.length === 0 && (
-                  <div className="px-2 py-2 text-sm" style={{ color: 'var(--text-muted)' }}>
-                    {t('lang.none', 'No language found.')}
-                  </div>
-                )}
-              </div>
+                </div>
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder={t('lang.search', 'Search language...')}
+                  className="w-full rounded-md px-3 py-2 text-sm fancy-input"
+                  autoFocus
+                />
+                <div className="mt-2 max-h-56 overflow-y-auto no-scrollbar space-y-1">
+                  {filteredLanguages.map((item, idx) => (
+                    <motion.button
+                      key={item.code}
+                      type="button"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.25 + idx * 0.02 }}
+                      onClick={() => {
+                        applyLanguage(item.code);
+                        setOpen(false);
+                        setQuery('');
+                      }}
+                      className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
+                        language === item.code ? 'language-item-active' : 'language-item'
+                      }`}
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                  {filteredLanguages.length === 0 && (
+                    <div className="px-2 py-2 text-sm" style={{ color: 'var(--text-muted)' }}>
+                      {t('lang.none', 'No language found.')}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
             </motion.div>
           ) : (
             <motion.button
