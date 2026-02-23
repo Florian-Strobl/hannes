@@ -321,9 +321,9 @@ export default function Home() {
                 onHoverEnd={() => setHoveredTheme(null)}
                 className={`rounded p-2 text-left border ${theme === 'midnight' ? 'border-violet-400' : ''}`}
                 animate={{
-                  backgroundColor: hoveredTheme === 'midnight' || theme === 'midnight' ? (hoveredTheme === 'midnight' ? '#f3f0ff' : 'rgb(243 240 255)') : 'var(--card-bg)',
+                  backgroundColor: hoveredTheme === 'midnight' || theme === 'midnight' ? (hoveredTheme === 'midnight' ? '#0f172a' : '#1e1b4b') : 'var(--card-bg)',
                   borderColor: hoveredTheme === 'midnight' || theme === 'midnight' ? '#a78bfa' : 'var(--card-border)',
-                  color: theme === 'midnight' ? '#e9e7ff' : 'var(--foreground)'
+                  color: theme === 'midnight' ? '#e9d5ff' : 'var(--foreground)'
                 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -332,7 +332,7 @@ export default function Home() {
                 <motion.div
                   className="font-semibold"
                   animate={{
-                    color: hoveredTheme === 'midnight' ? '#cffafe' : (theme === 'midnight' ? '#c4b5fd' : 'var(--foreground)')
+                    color: hoveredTheme === 'midnight' ? '#e0e7ff' : (theme === 'midnight' ? '#ddd6fe' : 'var(--foreground)')
                   }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
@@ -341,7 +341,7 @@ export default function Home() {
                 <motion.div
                   className="text-xs"
                   animate={{
-                    color: hoveredTheme === 'midnight' ? '#a78bfa' : (theme === 'midnight' ? '#a78bfa' : 'var(--text-muted)')
+                    color: hoveredTheme === 'midnight' ? '#c4b5fd' : (theme === 'midnight' ? '#c4b5fd' : 'var(--text-muted)')
                   }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
