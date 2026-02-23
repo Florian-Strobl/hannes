@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Nav from '../components/Nav';
+import { useTranslation } from '../components/TranslationProvider';
 
 export default function Register() {
+  const { t } = useTranslation();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -100,13 +102,13 @@ export default function Register() {
             className="w-full p-2 border rounded"
             style={{ backgroundColor: 'var(--input-bg)', color: 'var(--foreground)', borderColor: 'var(--card-border)' }}
           >
-            <option value="customer" style={{ backgroundColor: 'var(--input-bg)', color: 'var(--foreground)' }}>Customer</option>
-            <option value="farmer" style={{ backgroundColor: 'var(--input-bg)', color: 'var(--foreground)' }}>Farmer</option>
+            <option value="customer" style={{ backgroundColor: 'var(--input-bg)', color: 'var(--foreground)' }}>{t('role.customer', 'Customer')}</option>
+            <option value="farmer" style={{ backgroundColor: 'var(--input-bg)', color: 'var(--foreground)' }}>{t('role.farmer', 'Farmer')}</option>
           </select>
           {form.role === 'farmer' && (
             <input
               type="password"
-              placeholder="Create a 4-digit PIN"
+              placeholder={t('register.pinCreate', 'Create a 4-digit PIN')}
               value={form.pin}
               onChange={(e) => setForm({ ...form, pin: e.target.value })}
               maxLength={4}

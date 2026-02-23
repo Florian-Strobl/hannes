@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Nav from '../components/Nav';
+import { useTranslation } from '../components/TranslationProvider';
 
 export default function Login() {
+  const { t } = useTranslation();
   const [loginType, setLoginType] = useState<'password' | 'pin'>('password');
   const [form, setForm] = useState({ email: '', password: '', pin: '' });
   const [showForgot, setShowForgot] = useState(false);
@@ -140,7 +142,7 @@ export default function Login() {
             className={`flex-1 p-2 rounded ${loginType === 'password' ? 'bg-blue-500 text-white' : ''}`}
             style={loginType !== 'password' ? { backgroundColor: 'var(--bg-muted)', color: 'var(--foreground)' } : {}}
           >
-            Customer
+            {t('role.customer', 'Customer')}
           </button>
           <button
             type="button"
@@ -148,7 +150,7 @@ export default function Login() {
             className={`flex-1 p-2 rounded ${loginType === 'pin' ? 'bg-blue-500 text-white' : ''}`}
             style={loginType !== 'pin' ? { backgroundColor: 'var(--bg-muted)', color: 'var(--foreground)' } : {}}
           >
-            Farmer
+            {t('role.farmer', 'Farmer')}
           </button>
         </div>
 
@@ -176,7 +178,7 @@ export default function Login() {
           ) : (
             <input
               type="password"
-              placeholder="4-digit PIN"
+              placeholder={t('register.pinCreate', 'Create a 4-digit PIN')}
               value={form.pin}
               onChange={(e) => setForm({ ...form, pin: e.target.value.slice(0, 4) })}
               maxLength={4}

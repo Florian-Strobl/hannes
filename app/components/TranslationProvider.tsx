@@ -39,6 +39,9 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'home.quantity': 'Menge',
     'home.total': 'Gesamt',
     'home.date': 'Datum',
+    'role.customer': 'Kunde',
+    'role.farmer': 'Landwirt',
+    'register.pinCreate': '4-stellige PIN erstellen',
   },
   fr: {
     'lang.choose': 'Choisir la langue',
@@ -57,6 +60,9 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'home.noOffers': 'Aucune offre pour le moment',
     'home.noOffersSub': 'De nouvelles coupes arrivent bientôt.',
     'home.buy': 'Acheter',
+    'role.customer': 'Client',
+    'role.farmer': 'Agriculteur',
+    'register.pinCreate': 'Créer un code PIN à 4 chiffres',
   },
   es: {
     'lang.choose': 'Elegir idioma',
@@ -75,6 +81,9 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'home.noOffers': 'Aún no hay ofertas',
     'home.noOffersSub': 'Pronto habrá cortes frescos disponibles.',
     'home.buy': 'Comprar',
+    'role.customer': 'Cliente',
+    'role.farmer': 'Granjero',
+    'register.pinCreate': 'Crear PIN de 4 dígitos',
   },
 };
 

@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Nav from '../components/Nav';
 import { useTheme } from '../components/ThemeProvider';
+import { useTranslation } from '../components/TranslationProvider';
 
 interface UserProfile {
   id: string;
@@ -21,6 +22,7 @@ export default function Profile() {
   const router = useRouter();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const { theme, mode, setTheme, toggleMode } = useTheme();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState('');
@@ -310,7 +312,7 @@ export default function Profile() {
                 )}
                 <div>
                   <label className="font-semibold">Role:</label>
-                  <p className="capitalize" style={{ color: 'var(--text-normal)' }}>{profile.role}</p>
+                  <p className="capitalize" style={{ color: 'var(--text-normal)' }}>{profile.role === 'farmer' ? t('role.farmer', 'Farmer') : t('role.customer', 'Customer')}</p>
                 </div>
               </div>
 

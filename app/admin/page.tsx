@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Nav from '../components/Nav';
+import { useTranslation } from '../components/TranslationProvider';
 
 interface Meat {
   id: string;
@@ -31,6 +32,7 @@ interface AdminUser {
 
 export default function Admin() {
   const { data: session } = useSession();
+  const { t } = useTranslation();
   const router = useRouter();
   const [meats, setMeats] = useState<Meat[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -279,7 +281,7 @@ export default function Admin() {
                 <div key={user.id} className="border p-4 rounded mb-4">
                   <p><strong>Name:</strong> {user.name}</p>
                   <p><strong>Email:</strong> {user.email}</p>
-                  <p><strong>Role:</strong> {user.role}</p>
+                  <p><strong>Role:</strong> {user.role === 'farmer' ? t('role.farmer', 'Farmer') : t('role.customer', 'Customer')}</p>
                   <p><strong>Joined:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
                   <button
                     onClick={() => handleDeleteUser(user.id)}
