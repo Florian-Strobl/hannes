@@ -49,7 +49,7 @@ export default function Register() {
       if (existsRes.ok) {
         const existsData = await existsRes.json();
         if (existsData.exists) {
-          setError('Email already exists!');
+          setError(t('register.emailExists', 'Email already exists!'));
           setLoading(false);
           return;
         }
@@ -63,19 +63,19 @@ export default function Register() {
       const data = await res.json();
 
       if (res.ok) {
-        alert('Registration successful! Please login.');
+        alert(t('register.success', 'Registration successful! Please login.'));
         router.push('/login');
       } else {
         // Handle specific farmer error
         if (data.error && data.error.includes('farmer')) {
-          setError('A farmer account already exists. Only one farmer can be registered. The farmer must delete their account before a new farmer can sign up.');
+          setError(t('register.farmerExists.warning', 'Cannot register as farmer. A farmer account already exists. The existing farmer must delete their account first.'));
           setFarmerExists(true);
         } else {
-          setError(data.error || data.details || 'Registration failed');
+          setError(data.error || data.details || t('register.errorOccurred', 'An error occurred'));
         }
       }
     } catch (err) {
-      setError('An error occurred');
+      setError(t('register.errorOccurred', 'An error occurred'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -86,12 +86,12 @@ export default function Register() {
     <div>
       <Nav />
       <div className="container mx-auto p-2 sm:p-4 max-w-full sm:max-w-md">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-4">Register</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4">{t('register.title', 'Register')}</h1>
         {error && <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
-            placeholder="Email"
+            placeholder={t('register.email', 'Email')}
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             className="w-full p-2 border rounded"
@@ -99,7 +99,7 @@ export default function Register() {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder={t('register.password', 'Password')}
             value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
             className="w-full p-2 border rounded"
@@ -107,7 +107,7 @@ export default function Register() {
           />
           <input
             type="text"
-            placeholder="Name"
+            placeholder={t('register.name', 'Name')}
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             className="w-full p-2 border rounded"
@@ -115,7 +115,7 @@ export default function Register() {
           />
           {form.role === 'customer' && (
             <textarea
-              placeholder="Address"
+              placeholder={t('register.address', 'Address')}
               value={form.address}
               onChange={(e) => setForm({ ...form, address: e.target.value })}
               className="w-full p-2 border rounded"
@@ -230,7 +230,7 @@ export default function Register() {
             whileTap={!loading && !(farmerExists && form.role === 'farmer') ? { scale: 0.96, backgroundColor: '#1d4ed8' } : {}}
             transition={{ type: 'spring', stiffness: 400, damping: 16 }}
           >
-            {loading ? 'Registering...' : 'Register'}
+            {loading ? t('register.registering', 'Registering...') : t('register.button', 'Register')}
           </motion.button>
         </form>
       </div>

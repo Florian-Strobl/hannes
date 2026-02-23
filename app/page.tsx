@@ -142,8 +142,8 @@ export default function Home() {
           <div className="mb-6 rounded-lg border p-3 sm:p-4" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <h2 className="text-base sm:text-lg font-semibold">Theme</h2>
-                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Customize the look before you log in.</p>
+                <h2 className="text-base sm:text-lg font-semibold">{t('home.theme', 'Theme')}</h2>
+                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{t('home.themeSubtitle', 'Customize the look before you log in.')}</p>
               </div>
               <motion.button
                 type="button"
@@ -154,7 +154,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
-                {mode === 'dark' ? 'Dark' : 'Light'} Mode
+                {mode === 'dark' ? t('home.darkMode', 'Dark Mode') : t('home.lightMode', 'Light Mode')}
               </motion.button>
             </div>
             <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
