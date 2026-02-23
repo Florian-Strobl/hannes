@@ -258,11 +258,7 @@ export default function Home() {
                   style={{
                     '--cursor-x': `${cursorPos.x}px`,
                     '--cursor-y': `${cursorPos.y}px`,
-                    filter: `
-                      drop-shadow(0 0 ${2 + glowIntensity * 6}px var(--accent-strong))
-                      drop-shadow(0 0 ${8 + glowIntensity * 12}px color-mix(in srgb, var(--accent) ${50 + glowIntensity * 30}%, transparent))
-                      drop-shadow(0 0 ${16 + glowIntensity * 20}px color-mix(in srgb, var(--accent-warm) ${30 + glowIntensity * 40}%, transparent))
-                    `,
+                    filter: `drop-shadow(0 0 ${Math.max(0, 8 * glowIntensity)}px color-mix(in srgb, var(--accent-strong) ${60 * glowIntensity}%, transparent))`,
                   } as React.CSSProperties & { '--cursor-x': string; '--cursor-y': string }}
                 >
                   {t('home.noOffers', 'No offers yet')}
