@@ -57,24 +57,6 @@ const LANGUAGES: Language[] = [
   { code: 'lt', label: 'Lietuvių' },
 ];
 
-declare global {
-  interface Window {
-    googleTranslateElementInit?: () => void;
-    google?: {
-      translate?: {
-        TranslateElement?: new (
-          options: {
-            pageLanguage: string;
-            autoDisplay: boolean;
-            includedLanguages: string;
-          },
-          elementId: string
-        ) => unknown;
-      };
-    };
-  }
-}
-
 const STORAGE_KEY = 'meatshop-language';
 
 export default function LanguageSwitcher() {
@@ -86,30 +68,6 @@ export default function LanguageSwitcher() {
     const saved = window.localStorage.getItem(STORAGE_KEY);
     if (saved) {
       setSelectedLanguage(saved);
-    }
-  }, []);
-
-  useEffect(() => {
-    window.googleTranslateElementInit = () => {
-      const TranslateElement = window.google?.translate?.TranslateElement;
-      if (!TranslateElement) return;
-
-      new TranslateElement(
-        {
-          pageLanguage: 'en',
-          autoDisplay: false,
-          includedLanguages: LANGUAGES.map((language) => language.code).join(','),
-        },
-        'google_translate_element'
-      );
-    };
-
-    if (!document.querySelector('script[data-google-translate="true"]')) {
-      const script = document.createElement('script');
-      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      script.async = true;
-      script.setAttribute('data-google-translate', 'true');
-      document.body.appendChild(script);
     }
   }, []);
 
@@ -127,23 +85,10 @@ export default function LanguageSwitcher() {
     setSelectedLanguage(code);
     window.localStorage.setItem(STORAGE_KEY, code);
     document.documentElement.lang = code;
-
-    if (code === 'en') {
-      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
-      window.location.reload();
-      return;
-    }
-
-    const value = `/auto/${code}`;
-    document.cookie = `googtrans=${value};path=/`;
-    document.cookie = `googtrans=${value};domain=${window.location.hostname};path=/`;
-    window.location.reload();
   };
 
   return (
-    <>
-      <div id="google_translate_element" className="hidden" />
-      <div className="fixed bottom-4 right-4 z-[60]">
+    <div className="fixed bottom-4 right-4 z-[60]">
         {open && (
           <div className="language-panel mb-3 w-[290px] max-w-[82vw] rounded-xl border p-3">
             <div className="mb-2 text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
@@ -189,6 +134,5 @@ export default function LanguageSwitcher() {
           🌐 Language
         </button>
       </div>
-    </>
   );
 }
