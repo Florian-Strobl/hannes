@@ -170,14 +170,14 @@ export default function Home() {
                 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                 <motion.div
                   className="font-semibold"
                   animate={{
                     color: hoveredTheme === 'butcher' ? '#fbb040' : (theme === 'butcher' ? '#fca84c' : 'var(--foreground)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Butcher
                 </motion.div>
@@ -186,7 +186,7 @@ export default function Home() {
                   animate={{
                     color: hoveredTheme === 'butcher' ? '#f97316' : (theme === 'butcher' ? '#fb923c' : 'var(--text-muted)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Warm & rustic
                 </motion.div>
@@ -209,14 +209,14 @@ export default function Home() {
                 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                 <motion.div
                   className="font-semibold"
                   animate={{
                     color: hoveredTheme === 'forest' ? '#52b788' : (theme === 'forest' ? '#74c69d' : 'var(--foreground)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Forest
                 </motion.div>
@@ -225,7 +225,7 @@ export default function Home() {
                   animate={{
                     color: hoveredTheme === 'forest' ? '#40916c' : (theme === 'forest' ? '#52b788' : 'var(--text-muted)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Fresh & earthy
                 </motion.div>
@@ -248,14 +248,14 @@ export default function Home() {
                 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                 <motion.div
                   className="font-semibold"
                   animate={{
                     color: hoveredTheme === 'stone' ? '#60a5fa' : (theme === 'stone' ? '#93c5fd' : 'var(--foreground)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Stone
                 </motion.div>
@@ -264,7 +264,7 @@ export default function Home() {
                   animate={{
                     color: hoveredTheme === 'stone' ? '#3b82f6' : (theme === 'stone' ? '#60a5fa' : 'var(--text-muted)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Cool & clean
                 </motion.div>
@@ -287,14 +287,14 @@ export default function Home() {
                 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                 <motion.div
                   className="font-semibold"
                   animate={{
                     color: hoveredTheme === 'violet' ? '#d8b4fe' : (theme === 'violet' ? '#e9d5ff' : 'var(--foreground)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Violet
                 </motion.div>
@@ -303,7 +303,7 @@ export default function Home() {
                   animate={{
                     color: hoveredTheme === 'violet' ? '#c084fc' : (theme === 'violet' ? '#d8b4fe' : 'var(--text-muted)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Lush & radiant
                 </motion.div>
@@ -327,14 +327,14 @@ export default function Home() {
                 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                 <motion.div
                   className="font-semibold"
                   animate={{
                     color: hoveredTheme === 'midnight' ? '#e0e7ff' : (theme === 'midnight' ? '#ddd6fe' : 'var(--foreground)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Midnight
                 </motion.div>
@@ -343,7 +343,7 @@ export default function Home() {
                   animate={{
                     color: hoveredTheme === 'midnight' ? '#c4b5fd' : (theme === 'midnight' ? '#c4b5fd' : 'var(--text-muted)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Noir & electric
                 </motion.div>
@@ -367,14 +367,14 @@ export default function Home() {
                 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                 <motion.div
                   className="font-semibold"
                   animate={{
                     color: hoveredTheme === 'obsidian' ? '#f472b6' : (theme === 'obsidian' ? '#f8b4d8' : 'var(--foreground)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Obsidian
                 </motion.div>
@@ -383,7 +383,7 @@ export default function Home() {
                   animate={{
                     color: hoveredTheme === 'obsidian' ? '#ec4899' : (theme === 'obsidian' ? '#f472b6' : 'var(--text-muted)')
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   Ink & violet
                 </motion.div>
