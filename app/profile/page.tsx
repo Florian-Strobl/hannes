@@ -232,7 +232,7 @@ export default function Profile() {
                   onClick={() => setTheme('butcher')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'butcher' ? 'border-orange-400' : ''}`}
                   animate={{
-                    backgroundColor: hoveredTheme === 'butcher' || theme === 'butcher' ? (hoveredTheme === 'butcher' ? '#fff5f0' : 'rgb(254 237 226)') : 'var(--card-bg)',
+                    backgroundColor: hoveredTheme === 'butcher' || theme === 'butcher' ? (hoveredTheme === 'butcher' ? '#5a2514' : '#7c3a17') : 'var(--card-bg)',
                     borderColor: hoveredTheme === 'butcher' || theme === 'butcher' ? '#fb923c' : 'var(--card-border)'
                   }}
                   onHoverStart={() => setHoveredTheme('butcher')}
@@ -244,7 +244,7 @@ export default function Profile() {
                   <motion.div
                     className="font-semibold"
                     animate={{
-                      color: hoveredTheme === 'butcher' ? '#ea580c' : (theme === 'butcher' ? '#7c2d12' : 'var(--foreground)')
+                      color: hoveredTheme === 'butcher' ? '#fbb040' : (theme === 'butcher' ? '#fca84c' : 'var(--foreground)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -253,7 +253,7 @@ export default function Profile() {
                   <motion.div
                     className="text-sm"
                     animate={{
-                      color: hoveredTheme === 'butcher' ? '#dc2622' : (theme === 'butcher' ? '#92400e' : 'var(--text-muted)')
+                      color: hoveredTheme === 'butcher' ? '#f97316' : (theme === 'butcher' ? '#fb923c' : 'var(--text-muted)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -271,7 +271,7 @@ export default function Profile() {
                   onClick={() => setTheme('forest')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'forest' ? 'border-green-400' : ''}`}
                   animate={{
-                    backgroundColor: hoveredTheme === 'forest' || theme === 'forest' ? (hoveredTheme === 'forest' ? '#f0fdf4' : 'rgb(240 253 244)') : 'var(--card-bg)',
+                    backgroundColor: hoveredTheme === 'forest' || theme === 'forest' ? (hoveredTheme === 'forest' ? '#1b4332' : '#2d6a4f') : 'var(--card-bg)',
                     borderColor: hoveredTheme === 'forest' || theme === 'forest' ? '#4ade80' : 'var(--card-border)'
                   }}
                   onHoverStart={() => setHoveredTheme('forest')}
@@ -283,7 +283,7 @@ export default function Profile() {
                   <motion.div
                     className="font-semibold"
                     animate={{
-                      color: hoveredTheme === 'forest' ? '#15803d' : (theme === 'forest' ? '#14532d' : 'var(--foreground)')
+                      color: hoveredTheme === 'forest' ? '#52b788' : (theme === 'forest' ? '#74c69d' : 'var(--foreground)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -292,7 +292,7 @@ export default function Profile() {
                   <motion.div
                     className="text-sm"
                     animate={{
-                      color: hoveredTheme === 'forest' ? '#166534' : (theme === 'forest' ? '#166534' : 'var(--text-muted)')
+                      color: hoveredTheme === 'forest' ? '#40916c' : (theme === 'forest' ? '#52b788' : 'var(--text-muted)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -310,7 +310,7 @@ export default function Profile() {
                   onClick={() => setTheme('stone')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'stone' ? 'border-blue-400' : ''}`}
                   animate={{
-                    backgroundColor: hoveredTheme === 'stone' || theme === 'stone' ? (hoveredTheme === 'stone' ? '#f0f4ff' : 'rgb(240 244 255)') : 'var(--card-bg)',
+                    backgroundColor: hoveredTheme === 'stone' || theme === 'stone' ? (hoveredTheme === 'stone' ? '#0c2340' : '#1e3a5f') : 'var(--card-bg)',
                     borderColor: hoveredTheme === 'stone' || theme === 'stone' ? '#60a5fa' : 'var(--card-border)'
                   }}
                   onHoverStart={() => setHoveredTheme('stone')}
@@ -322,7 +322,7 @@ export default function Profile() {
                   <motion.div
                     className="font-semibold"
                     animate={{
-                      color: hoveredTheme === 'stone' ? '#2563eb' : (theme === 'stone' ? '#1e3a8a' : 'var(--foreground)')
+                      color: hoveredTheme === 'stone' ? '#60a5fa' : (theme === 'stone' ? '#93c5fd' : 'var(--foreground)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -331,7 +331,7 @@ export default function Profile() {
                   <motion.div
                     className="text-sm"
                     animate={{
-                      color: hoveredTheme === 'stone' ? '#1e40af' : (theme === 'stone' ? '#1e40af' : 'var(--text-muted)')
+                      color: hoveredTheme === 'stone' ? '#3b82f6' : (theme === 'stone' ? '#60a5fa' : 'var(--text-muted)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -349,7 +349,7 @@ export default function Profile() {
                   onClick={() => setTheme('violet')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'violet' ? 'border-purple-400' : ''}`}
                   animate={{
-                    backgroundColor: hoveredTheme === 'violet' || theme === 'violet' ? (hoveredTheme === 'violet' ? '#faf5ff' : 'rgb(250 245 255)') : 'var(--card-bg)',
+                    backgroundColor: hoveredTheme === 'violet' || theme === 'violet' ? (hoveredTheme === 'violet' ? '#3e2465' : '#5b2c8f') : 'var(--card-bg)',
                     borderColor: hoveredTheme === 'violet' || theme === 'violet' ? '#c084fc' : 'var(--card-border)'
                   }}
                   onHoverStart={() => setHoveredTheme('violet')}
@@ -361,7 +361,7 @@ export default function Profile() {
                   <motion.div
                     className="font-semibold"
                     animate={{
-                      color: hoveredTheme === 'violet' ? '#a855f7' : (theme === 'violet' ? '#6d28d9' : 'var(--foreground)')
+                      color: hoveredTheme === 'violet' ? '#d8b4fe' : (theme === 'violet' ? '#e9d5ff' : 'var(--foreground)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -370,7 +370,7 @@ export default function Profile() {
                   <motion.div
                     className="text-sm"
                     animate={{
-                      color: hoveredTheme === 'violet' ? '#7c3aed' : (theme === 'violet' ? '#7c3aed' : 'var(--text-muted)')
+                      color: hoveredTheme === 'violet' ? '#c084fc' : (theme === 'violet' ? '#d8b4fe' : 'var(--text-muted)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -428,9 +428,9 @@ export default function Profile() {
                   onClick={() => setTheme('obsidian')}
                   className={`rounded p-3 text-left border transition-all group relative ${theme === 'obsidian' ? 'border-fuchsia-400' : ''}`}
                   animate={{
-                    backgroundColor: hoveredTheme === 'obsidian' || theme === 'obsidian' ? (hoveredTheme === 'obsidian' ? '#faf4ff' : 'rgb(250 244 255)') : 'var(--card-bg)',
+                    backgroundColor: hoveredTheme === 'obsidian' || theme === 'obsidian' ? (hoveredTheme === 'obsidian' ? '#16111d' : '#2a1f3d') : 'var(--card-bg)',
                     borderColor: hoveredTheme === 'obsidian' || theme === 'obsidian' ? '#ec4899' : 'var(--card-border)',
-                    color: theme === 'obsidian' ? '#f0e7ff' : 'var(--foreground)'
+                    color: theme === 'obsidian' ? '#f8d5ff' : 'var(--foreground)'
                   }}
                   onHoverStart={() => setHoveredTheme('obsidian')}
                   onHoverEnd={() => setHoveredTheme(null)}
@@ -441,7 +441,7 @@ export default function Profile() {
                   <motion.div
                     className="font-semibold"
                     animate={{
-                      color: hoveredTheme === 'obsidian' ? '#d946ef' : (theme === 'obsidian' ? '#d8b4fe' : 'var(--foreground)')
+                      color: hoveredTheme === 'obsidian' ? '#f472b6' : (theme === 'obsidian' ? '#f8b4d8' : 'var(--foreground)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
@@ -450,7 +450,7 @@ export default function Profile() {
                   <motion.div
                     className="text-sm"
                     animate={{
-                      color: hoveredTheme === 'obsidian' ? '#c084fc' : (theme === 'obsidian' ? '#c084fc' : 'var(--text-muted)')
+                      color: hoveredTheme === 'obsidian' ? '#ec4899' : (theme === 'obsidian' ? '#f472b6' : 'var(--text-muted)')
                     }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
