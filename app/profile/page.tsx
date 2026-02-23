@@ -68,11 +68,11 @@ export default function Profile() {
         });
         setError('');
       } else {
-        setError(data.error || 'Failed to load profile');
+        setError(data.error || t('profile.failedLoad', 'Failed to load profile'));
         console.error('Profile error:', data);
       }
     } catch (error) {
-      setError('Failed to load profile: ' + String(error));
+      setError(`${t('profile.failedLoad', 'Failed to load profile')}: ${String(error)}`);
       console.error('Profile fetch error:', error);
     } finally {
       setLoading(false);
@@ -99,17 +99,17 @@ export default function Profile() {
     setSuccess('');
 
     if (formData.password && formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('profile.passwordMismatch', 'Passwords do not match'));
       return;
     }
 
     if (formData.pin && formData.pin !== formData.confirmPin) {
-      setError('PINs do not match');
+      setError(t('profile.pinMismatch', 'PINs do not match'));
       return;
     }
 
     if (formData.pin && formData.pin.length !== 4) {
-      setError('PIN must be 4 digits');
+      setError(t('profile.pinLength', 'PIN must be 4 digits'));
       return;
     }
 
@@ -147,7 +147,7 @@ export default function Profile() {
 
       if (res.ok) {
         setProfile(data.user);
-        setSuccess('Profile updated successfully');
+        setSuccess(t('profile.updated', 'Profile updated successfully'));
         setFormData({
           ...formData,
           password: '',
@@ -157,11 +157,11 @@ export default function Profile() {
         });
         setEditing(false);
       } else {
-        setError(data.error || 'Failed to update profile');
+        setError(data.error || t('profile.failedUpdate', 'Failed to update profile'));
       }
     } catch (error) {
       console.error('Profile save error:', error);
-      setError('An error occurred');
+      setError(t('profile.errorOccurred', 'An error occurred'));
     }
   };
 
@@ -169,7 +169,7 @@ export default function Profile() {
     return (
       <div>
         <Nav />
-        <div className="container mx-auto p-4">Loading...</div>
+        <div className="container mx-auto p-4">{t('common.loading', 'Loading...')}</div>
       </div>
     );
   }
@@ -181,7 +181,7 @@ export default function Profile() {
         <div className="container mx-auto p-4">
           <div className="bg-red-100 text-red-700 p-4 rounded">Error: {error}</div>
           <button onClick={() => router.push('/')} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
-            Go to Home
+            {t('profile.goHome', 'Go to Home')}
           </button>
         </div>
       </div>
@@ -192,7 +192,7 @@ export default function Profile() {
     return (
       <div>
         <Nav />
-        <div className="container mx-auto p-4">Profile not found</div>
+        <div className="container mx-auto p-4">{t('profile.notFound', 'Profile not found')}</div>
       </div>
     );
   }
@@ -211,14 +211,14 @@ export default function Profile() {
             <div className="space-y-6">
             <div className="border rounded p-6">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-xl font-semibold">Theme</h2>
+                <h2 className="text-xl font-semibold">{t('profile.theme', 'Theme')}</h2>
                 <button
                   type="button"
                   onClick={toggleMode}
                   className="px-3 py-1 rounded border"
                   style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--card-border)', color: 'var(--foreground)' }}
                 >
-                  {mode === 'dark' ? 'Dark' : 'Light'} Mode
+                  {mode === 'dark' ? t('profile.dark', 'Dark') : t('profile.light', 'Light')} {t('profile.mode', 'Mode')}
                 </button>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
@@ -312,7 +312,7 @@ export default function Profile() {
                 )}
                 <div>
                   <label className="font-semibold">{t('profile.role', 'Role')}:</label>
-                  <p className="capitalize" style={{ color: 'var(--text-normal)' }}>{profile.role === 'farmer' ? t('role.farmer', 'Farmer') : t('role.customer', 'Customer')}</p>
+                  <p className="capitalize" style={{ color: 'var(--text-normal)' }}>{profile.role === 'farmer' ? t('roles.farmer', 'Farmer') : t('roles.customer', 'Customer')}</p>
                 </div>
               </div>
 

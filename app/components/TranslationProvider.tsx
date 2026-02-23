@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useSyncExternalStore } from 'react';
 
 type SupportedLanguage = 'en' | 'de' | 'fr' | 'es';
 
@@ -41,6 +41,9 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'home.date': 'Datum',
     'role.customer': 'Kunde',
     'role.farmer': 'Landwirt',
+    'roles.customer': 'Kunde',
+    'roles.farmer': 'Landwirt',
+    'common.loading': 'Wird geladen...',
     'register.pinCreate': '4-stellige PIN erstellen',
     'profile.title': 'Mein Profil',
     'profile.email': 'E-Mail',
@@ -56,6 +59,19 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'profile.confirmPin': 'PIN bestätigen',
     'profile.saveChanges': 'Änderungen speichern',
     'profile.cancel': 'Abbrechen',
+    'profile.failedLoad': 'Profil konnte nicht geladen werden',
+    'profile.passwordMismatch': 'Passwörter stimmen nicht überein',
+    'profile.pinMismatch': 'PINs stimmen nicht überein',
+    'profile.pinLength': 'PIN muss 4-stellig sein',
+    'profile.updated': 'Profil erfolgreich aktualisiert',
+    'profile.failedUpdate': 'Profil konnte nicht aktualisiert werden',
+    'profile.errorOccurred': 'Ein Fehler ist aufgetreten',
+    'profile.goHome': 'Zur Startseite',
+    'profile.notFound': 'Profil nicht gefunden',
+    'profile.theme': 'Design',
+    'profile.dark': 'Dunkel',
+    'profile.light': 'Hell',
+    'profile.mode': 'Modus',
     'reset.invalidLink': 'Ungültiger Reset-Link',
     'reset.title': 'Passwort/PIN zurücksetzen',
     'reset.passwordTab': 'Passwort zurücksetzen',
@@ -70,6 +86,63 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'reset.requiredPassword': 'Passwort ist erforderlich',
     'reset.requiredPin': 'PIN ist erforderlich',
     'reset.success': 'Erfolgreich zurückgesetzt! Du kannst dich jetzt mit deinem neuen {type} anmelden.',
+    'reset.emailMissing': 'E-Mail existiert nicht!',
+    'reset.failed': 'Zurücksetzen fehlgeschlagen',
+    'reset.errorOccurred': 'Ein Fehler ist aufgetreten',
+    'admin.accessDenied': 'Zugriff verweigert',
+    'admin.title': 'Admin-Bereich',
+    'admin.addMeat': 'Fleisch hinzufügen',
+    'admin.name': 'Name',
+    'admin.price': 'Preis',
+    'admin.stockKg': 'Bestand (kg)',
+    'admin.manageMeats': 'Fleisch verwalten',
+    'admin.currentPrice': 'Aktueller Preis',
+    'admin.currentStock': 'Aktueller Bestand',
+    'admin.newPrice': 'Neuer Preis',
+    'admin.newStock': 'Neuer Bestand',
+    'admin.update': 'Aktualisieren',
+    'admin.delete': 'Löschen',
+    'admin.orders': 'Bestellungen',
+    'admin.customer': 'Kunde',
+    'admin.address': 'Adresse',
+    'admin.meat': 'Fleisch',
+    'admin.quantity': 'Menge',
+    'admin.total': 'Gesamt',
+    'admin.date': 'Datum',
+    'admin.markDelivered': 'Als geliefert markieren',
+    'admin.users': 'Benutzer',
+    'admin.role': 'Rolle',
+    'admin.joined': 'Beigetreten',
+    'admin.deleteUser': 'Benutzer löschen',
+    'admin.errorAddMeat': 'Fehler beim Hinzufügen von Fleisch',
+    'admin.errorClearOrder': 'Fehler beim Entfernen der Bestellung',
+    'admin.errorDeleteMeat': 'Fehler beim Löschen von Fleisch',
+    'admin.errorDeleteUser': 'Fehler beim Löschen des Benutzers',
+    'admin.confirmDeleteMeat': 'Möchtest du dieses Fleisch wirklich löschen?',
+    'admin.confirmDeleteUser': 'Diesen Benutzer und alle Bestellungen löschen?',
+    'forgot.title': '{type} zurücksetzen',
+    'forgot.link': '{type} vergessen?',
+    'forgot.info': 'Gib deine E-Mail-Adresse ein und wir senden dir einen Bestätigungscode zum Zurücksetzen deiner {type}.',
+    'forgot.sendCode': 'Code senden',
+    'forgot.sending': 'Wird gesendet...',
+    'forgot.cancel': 'Abbrechen',
+    'forgot.emailRequired': 'E-Mail ist erforderlich',
+    'forgot.codeSent': 'Ein Bestätigungscode wurde an {email} gesendet. Bitte prüfe deine E-Mails.',
+    'forgot.failedRequest': 'Anfrage konnte nicht verarbeitet werden',
+    'forgot.errorOccurred': 'Ein Fehler ist aufgetreten',
+    'forgot.verifyInfo': 'Gib den 6-stelligen Bestätigungscode ein, der an deine E-Mail gesendet wurde.',
+    'forgot.invalidCode': 'Bitte gib einen gültigen 6-stelligen Code ein',
+    'forgot.verifying': 'Wird verifiziert...',
+    'forgot.verifyCode': 'Code verifizieren',
+    'forgot.back': 'Zurück',
+    'forgot.verifySuccess': 'Verifizierung erfolgreich! Du kannst jetzt den Reset-Link öffnen.',
+    'forgot.verifyFailed': 'Verifizierung fehlgeschlagen',
+    'forgot.openLink': 'Reset-Link öffnen',
+    'forgot.close': 'Schließen',
+    'forgot.type.password': 'Passwort',
+    'forgot.type.pin': 'PIN',
+    'forgot.type.passwordLower': 'Passwort',
+    'forgot.type.pinLower': 'PIN',
   },
   fr: {
     'lang.choose': 'Choisir la langue',
@@ -90,6 +163,9 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'home.buy': 'Acheter',
     'role.customer': 'Client',
     'role.farmer': 'Agriculteur',
+    'roles.customer': 'Client',
+    'roles.farmer': 'Agriculteur',
+    'common.loading': 'Chargement...',
     'register.pinCreate': 'Créer un code PIN à 4 chiffres',
     'profile.title': 'Mon profil',
     'profile.email': 'E-mail',
@@ -105,6 +181,19 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'profile.confirmPin': 'Confirmer le PIN',
     'profile.saveChanges': 'Enregistrer les modifications',
     'profile.cancel': 'Annuler',
+    'profile.failedLoad': 'Échec du chargement du profil',
+    'profile.passwordMismatch': 'Les mots de passe ne correspondent pas',
+    'profile.pinMismatch': 'Les PIN ne correspondent pas',
+    'profile.pinLength': 'Le PIN doit contenir 4 chiffres',
+    'profile.updated': 'Profil mis à jour avec succès',
+    'profile.failedUpdate': 'Échec de la mise à jour du profil',
+    'profile.errorOccurred': 'Une erreur est survenue',
+    'profile.goHome': 'Aller à l’accueil',
+    'profile.notFound': 'Profil introuvable',
+    'profile.theme': 'Thème',
+    'profile.dark': 'Sombre',
+    'profile.light': 'Clair',
+    'profile.mode': 'Mode',
     'reset.invalidLink': 'Lien de réinitialisation invalide',
     'reset.title': 'Réinitialiser le mot de passe/PIN',
     'reset.passwordTab': 'Réinitialiser le mot de passe',
@@ -119,6 +208,63 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'reset.requiredPassword': 'Le mot de passe est requis',
     'reset.requiredPin': 'Le PIN est requis',
     'reset.success': 'Réinitialisation réussie ! Tu peux maintenant te connecter avec ton nouveau {type}.',
+    'reset.emailMissing': 'L’e-mail n’existe pas !',
+    'reset.failed': 'Échec de la réinitialisation',
+    'reset.errorOccurred': 'Une erreur est survenue',
+    'admin.accessDenied': 'Accès refusé',
+    'admin.title': 'Panneau Admin',
+    'admin.addMeat': 'Ajouter de la viande',
+    'admin.name': 'Nom',
+    'admin.price': 'Prix',
+    'admin.stockKg': 'Stock (kg)',
+    'admin.manageMeats': 'Gérer les viandes',
+    'admin.currentPrice': 'Prix actuel',
+    'admin.currentStock': 'Stock actuel',
+    'admin.newPrice': 'Nouveau prix',
+    'admin.newStock': 'Nouveau stock',
+    'admin.update': 'Mettre à jour',
+    'admin.delete': 'Supprimer',
+    'admin.orders': 'Commandes',
+    'admin.customer': 'Client',
+    'admin.address': 'Adresse',
+    'admin.meat': 'Viande',
+    'admin.quantity': 'Quantité',
+    'admin.total': 'Total',
+    'admin.date': 'Date',
+    'admin.markDelivered': 'Marquer comme livrée',
+    'admin.users': 'Utilisateurs',
+    'admin.role': 'Rôle',
+    'admin.joined': 'Inscrit le',
+    'admin.deleteUser': 'Supprimer l’utilisateur',
+    'admin.errorAddMeat': 'Erreur lors de l’ajout de viande',
+    'admin.errorClearOrder': 'Erreur lors de la suppression de la commande',
+    'admin.errorDeleteMeat': 'Erreur lors de la suppression de viande',
+    'admin.errorDeleteUser': 'Erreur lors de la suppression de l’utilisateur',
+    'admin.confirmDeleteMeat': 'Supprimer cette viande ?',
+    'admin.confirmDeleteUser': 'Supprimer cet utilisateur et toutes ses commandes ?',
+    'forgot.title': 'Réinitialiser le/la {type}',
+    'forgot.link': '{type} oublié(e) ?',
+    'forgot.info': 'Saisis ton e-mail et nous t’enverrons un code de vérification pour réinitialiser ton/ta {type}.',
+    'forgot.sendCode': 'Envoyer le code',
+    'forgot.sending': 'Envoi...',
+    'forgot.cancel': 'Annuler',
+    'forgot.emailRequired': 'L’e-mail est requis',
+    'forgot.codeSent': 'Un code de vérification a été envoyé à {email}. Vérifie ta boîte mail.',
+    'forgot.failedRequest': 'Échec du traitement de la demande',
+    'forgot.errorOccurred': 'Une erreur est survenue',
+    'forgot.verifyInfo': 'Saisis le code de vérification à 6 chiffres envoyé à ton e-mail.',
+    'forgot.invalidCode': 'Veuillez saisir un code valide à 6 chiffres',
+    'forgot.verifying': 'Vérification...',
+    'forgot.verifyCode': 'Vérifier le code',
+    'forgot.back': 'Retour',
+    'forgot.verifySuccess': 'Vérification réussie ! Tu peux maintenant ouvrir le lien de réinitialisation.',
+    'forgot.verifyFailed': 'Échec de la vérification',
+    'forgot.openLink': 'Ouvrir le lien de réinitialisation',
+    'forgot.close': 'Fermer',
+    'forgot.type.password': 'mot de passe',
+    'forgot.type.pin': 'PIN',
+    'forgot.type.passwordLower': 'mot de passe',
+    'forgot.type.pinLower': 'PIN',
   },
   es: {
     'lang.choose': 'Elegir idioma',
@@ -139,6 +285,9 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'home.buy': 'Comprar',
     'role.customer': 'Cliente',
     'role.farmer': 'Granjero',
+    'roles.customer': 'Cliente',
+    'roles.farmer': 'Granjero',
+    'common.loading': 'Cargando...',
     'register.pinCreate': 'Crear PIN de 4 dígitos',
     'profile.title': 'Mi perfil',
     'profile.email': 'Correo',
@@ -154,6 +303,19 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'profile.confirmPin': 'Confirmar PIN',
     'profile.saveChanges': 'Guardar cambios',
     'profile.cancel': 'Cancelar',
+    'profile.failedLoad': 'No se pudo cargar el perfil',
+    'profile.passwordMismatch': 'Las contraseñas no coinciden',
+    'profile.pinMismatch': 'Los PIN no coinciden',
+    'profile.pinLength': 'El PIN debe tener 4 dígitos',
+    'profile.updated': 'Perfil actualizado correctamente',
+    'profile.failedUpdate': 'No se pudo actualizar el perfil',
+    'profile.errorOccurred': 'Ocurrió un error',
+    'profile.goHome': 'Ir al inicio',
+    'profile.notFound': 'Perfil no encontrado',
+    'profile.theme': 'Tema',
+    'profile.dark': 'Oscuro',
+    'profile.light': 'Claro',
+    'profile.mode': 'Modo',
     'reset.invalidLink': 'Enlace de restablecimiento no válido',
     'reset.title': 'Restablecer contraseña/PIN',
     'reset.passwordTab': 'Restablecer contraseña',
@@ -168,37 +330,117 @@ const TRANSLATIONS: Record<SupportedLanguage, Record<string, string>> = {
     'reset.requiredPassword': 'La contraseña es obligatoria',
     'reset.requiredPin': 'El PIN es obligatorio',
     'reset.success': '¡Restablecido con éxito! Ahora puedes iniciar sesión con tu nuevo {type}.',
+    'reset.emailMissing': '¡El correo no existe!',
+    'reset.failed': 'Error al restablecer',
+    'reset.errorOccurred': 'Ocurrió un error',
+    'admin.accessDenied': 'Acceso denegado',
+    'admin.title': 'Panel de administración',
+    'admin.addMeat': 'Agregar carne',
+    'admin.name': 'Nombre',
+    'admin.price': 'Precio',
+    'admin.stockKg': 'Stock (kg)',
+    'admin.manageMeats': 'Gestionar carnes',
+    'admin.currentPrice': 'Precio actual',
+    'admin.currentStock': 'Stock actual',
+    'admin.newPrice': 'Nuevo precio',
+    'admin.newStock': 'Nuevo stock',
+    'admin.update': 'Actualizar',
+    'admin.delete': 'Eliminar',
+    'admin.orders': 'Pedidos',
+    'admin.customer': 'Cliente',
+    'admin.address': 'Dirección',
+    'admin.meat': 'Carne',
+    'admin.quantity': 'Cantidad',
+    'admin.total': 'Total',
+    'admin.date': 'Fecha',
+    'admin.markDelivered': 'Marcar como entregado',
+    'admin.users': 'Usuarios',
+    'admin.role': 'Rol',
+    'admin.joined': 'Registrado',
+    'admin.deleteUser': 'Eliminar usuario',
+    'admin.errorAddMeat': 'Error al agregar carne',
+    'admin.errorClearOrder': 'Error al eliminar el pedido',
+    'admin.errorDeleteMeat': 'Error al eliminar carne',
+    'admin.errorDeleteUser': 'Error al eliminar el usuario',
+    'admin.confirmDeleteMeat': '¿Seguro que deseas eliminar esta carne?',
+    'admin.confirmDeleteUser': '¿Eliminar este usuario y todos sus pedidos?',
+    'forgot.title': 'Restablecer {type}',
+    'forgot.link': '¿Olvidaste tu {type}?',
+    'forgot.info': 'Ingresa tu correo y te enviaremos un código de verificación para restablecer tu {type}.',
+    'forgot.sendCode': 'Enviar código',
+    'forgot.sending': 'Enviando...',
+    'forgot.cancel': 'Cancelar',
+    'forgot.emailRequired': 'El correo es obligatorio',
+    'forgot.codeSent': 'Se envió un código de verificación a {email}. Revisa tu correo.',
+    'forgot.failedRequest': 'No se pudo procesar la solicitud',
+    'forgot.errorOccurred': 'Ocurrió un error',
+    'forgot.verifyInfo': 'Ingresa el código de verificación de 6 dígitos enviado a tu correo.',
+    'forgot.invalidCode': 'Ingresa un código válido de 6 dígitos',
+    'forgot.verifying': 'Verificando...',
+    'forgot.verifyCode': 'Verificar código',
+    'forgot.back': 'Volver',
+    'forgot.verifySuccess': '¡Verificación exitosa! Ahora puedes abrir el enlace de restablecimiento.',
+    'forgot.verifyFailed': 'Falló la verificación',
+    'forgot.openLink': 'Abrir enlace de restablecimiento',
+    'forgot.close': 'Cerrar',
+    'forgot.type.password': 'contraseña',
+    'forgot.type.pin': 'PIN',
+    'forgot.type.passwordLower': 'contraseña',
+    'forgot.type.pinLower': 'PIN',
   },
 };
 
 const TranslationContext = createContext<TranslationContextValue | undefined>(undefined);
 
+const LANGUAGE_EVENT = 'meatshop-language-change';
+
+function subscribeLanguage(onStoreChange: () => void) {
+  if (typeof window === 'undefined') return () => {};
+
+  const handler = () => onStoreChange();
+  window.addEventListener('storage', handler);
+  window.addEventListener(LANGUAGE_EVENT, handler);
+
+  return () => {
+    window.removeEventListener('storage', handler);
+    window.removeEventListener(LANGUAGE_EVENT, handler);
+  };
+}
+
+function getClientLanguageSnapshot() {
+  if (typeof window === 'undefined') return 'en';
+  return window.localStorage.getItem(STORAGE_KEY) ?? 'en';
+}
+
+function getServerLanguageSnapshot() {
+  return 'en';
+}
+
 export function TranslationProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<string>('en');
+  const language = useSyncExternalStore(
+    subscribeLanguage,
+    getClientLanguageSnapshot,
+    getServerLanguageSnapshot,
+  );
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      setLanguageState(saved);
-    }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, language);
+    if (typeof window === 'undefined') return;
     document.documentElement.lang = language;
   }, [language]);
 
-  const setLanguage = (nextLanguage: string) => {
-    setLanguageState(nextLanguage);
-  };
+  const setLanguage = useCallback((nextLanguage: string) => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(STORAGE_KEY, nextLanguage);
+    window.dispatchEvent(new Event(LANGUAGE_EVENT));
+  }, []);
 
-  const t = (key: string, fallback: string) => {
+  const t = useCallback((key: string, fallback: string) => {
     if (language === 'en') return fallback;
     const table = TRANSLATIONS[language as SupportedLanguage];
     return table?.[key] ?? fallback;
-  };
+  }, [language]);
 
-  const value = useMemo(() => ({ language, setLanguage, t }), [language]);
+  const value = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t]);
 
   return <TranslationContext.Provider value={value}>{children}</TranslationContext.Provider>;
 }

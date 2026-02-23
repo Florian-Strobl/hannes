@@ -85,7 +85,7 @@ export default function Admin() {
       setForm({ name: '', price: '', stock: '' });
       fetchMeats();
     } else {
-      alert('Error adding meat');
+      alert(t('admin.errorAddMeat', 'Error adding meat'));
     }
   };
 
@@ -110,12 +110,12 @@ export default function Admin() {
       fetchOrders();
     } else {
       const error = await res.json();
-      alert(error.error || 'Error clearing order');
+      alert(error.error || t('admin.errorClearOrder', 'Error clearing order'));
     }
   };
 
   const handleDeleteMeat = async (meatId: string) => {
-    if (!confirm('Are you sure you want to delete this meat?')) return;
+    if (!confirm(t('admin.confirmDeleteMeat', 'Are you sure you want to delete this meat?'))) return;
     
     const res = await fetch(`/api/meats/${meatId}`, {
       method: 'DELETE',
@@ -124,12 +124,12 @@ export default function Admin() {
       fetchMeats();
     } else {
       const error = await res.json();
-      alert(error.error || 'Error deleting meat');
+      alert(error.error || t('admin.errorDeleteMeat', 'Error deleting meat'));
     }
   };
 
   const handleDeleteUser = async (userId: string) => {
-    if (!confirm('Delete this user and all their orders?')) return;
+    if (!confirm(t('admin.confirmDeleteUser', 'Delete this user and all their orders?'))) return;
 
     const res = await fetch('/api/admin/users', {
       method: 'DELETE',
@@ -142,29 +142,29 @@ export default function Admin() {
       fetchOrders();
     } else {
       const error = await res.json();
-      alert(error.error || 'Error deleting user');
+      alert(error.error || t('admin.errorDeleteUser', 'Error deleting user'));
     }
   };
 
   const hasItems = <T,>(items: T[]) => items.length > 0;
 
   if (!session || !session.user || session.user.role !== 'farmer') {
-    return <div>Access denied</div>;
+    return <div>{t('admin.accessDenied', 'Access denied')}</div>;
   }
 
   return (
     <div>
       <Nav />
       <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-4">Admin Panel</h1>
+        <h1 className="text-3xl font-bold mb-4">{t('admin.title', 'Admin Panel')}</h1>
         <div className="max-h-[calc(100vh-160px)] overflow-y-auto pr-2 no-scrollbar">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-6">
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Add Meat</h2>
+            <h2 className="text-2xl font-semibold mb-4">{t('admin.addMeat', 'Add Meat')}</h2>
             <form onSubmit={handleAddMeat} className="space-y-4">
               <input
                 type="text"
-                placeholder="Name"
+                placeholder={t('admin.name', 'Name')}
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full p-2 border rounded"
@@ -172,7 +172,7 @@ export default function Admin() {
               />
               <input
                 type="number"
-                placeholder="Price"
+                placeholder={t('admin.price', 'Price')}
                 value={form.price}
                 onChange={(e) => setForm({ ...form, price: e.target.value })}
                 className="w-full p-2 border rounded"
@@ -180,30 +180,30 @@ export default function Admin() {
               />
               <input
                 type="number"
-                placeholder="Stock (kg)"
+                placeholder={t('admin.stockKg', 'Stock (kg)')}
                 value={form.stock}
                 onChange={(e) => setForm({ ...form, stock: e.target.value })}
                 className="w-full p-2 border rounded"
                 required
               />
               <button type="submit" className="w-full p-2 rounded theme-button">
-                Add Meat
+                {t('admin.addMeat', 'Add Meat')}
               </button>
             </form>
             {hasItems(meats) && (
               <>
-                <h2 className="text-2xl font-semibold mb-4 mt-8">Manage Meats</h2>
+                <h2 className="text-2xl font-semibold mb-4 mt-8">{t('admin.manageMeats', 'Manage Meats')}</h2>
                 <div className="section-bar"></div>
                 <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
                   {meats.map((meat) => (
                     <div key={meat.id} className="border p-4 rounded mb-4">
                     <h3>{meat.name}</h3>
-                    <p>Current price: ${meat.price}</p>
-                    <p>Current stock: {meat.stock} kg</p>
+                    <p>{t('admin.currentPrice', 'Current price')}: ${meat.price}</p>
+                    <p>{t('admin.currentStock', 'Current stock')}: {meat.stock} kg</p>
                     <input
                       type="number"
                       step="0.01"
-                      placeholder="New price"
+                      placeholder={t('admin.newPrice', 'New price')}
                       id={`price-${meat.id}`}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
@@ -216,7 +216,7 @@ export default function Admin() {
                     />
                     <input
                       type="number"
-                      placeholder="New stock"
+                      placeholder={t('admin.newStock', 'New stock')}
                       id={`stock-${meat.id}`}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
@@ -235,13 +235,13 @@ export default function Admin() {
                       }}
                       className="bg-blue-500 text-white px-3 py-1 rounded"
                     >
-                      Update
+                      {t('admin.update', 'Update')}
                     </button>
                     <button
                       onClick={() => handleDeleteMeat(meat.id)}
                       className="bg-red-500 text-white px-3 py-1 rounded ml-2"
                     >
-                      Delete
+                      {t('admin.delete', 'Delete')}
                     </button>
                     </div>
                   ))}
@@ -251,22 +251,22 @@ export default function Admin() {
           </div>
           {hasItems(orders) && (
             <div>
-              <h2 className="text-2xl font-semibold mb-4">Orders</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('admin.orders', 'Orders')}</h2>
               <div className="section-bar"></div>
               <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
                 {orders.map((order) => (
                   <div key={order.id} className="border p-4 rounded mb-4">
-                  <p><strong>Customer:</strong> {order.user.name} ({order.user.email})</p>
-                  <p><strong>Address:</strong> {order.user.address}</p>
-                  <p><strong>Meat:</strong> {order.meat.name}</p>
-                  <p><strong>Quantity:</strong> {order.quantity} kg</p>
-                  <p><strong>Total:</strong> ${order.total}</p>
-                  <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
+                  <p><strong>{t('admin.customer', 'Customer')}:</strong> {order.user.name} ({order.user.email})</p>
+                  <p><strong>{t('admin.address', 'Address')}:</strong> {order.user.address}</p>
+                  <p><strong>{t('admin.meat', 'Meat')}:</strong> {order.meat.name}</p>
+                  <p><strong>{t('admin.quantity', 'Quantity')}:</strong> {order.quantity} kg</p>
+                  <p><strong>{t('admin.total', 'Total')}:</strong> ${order.total}</p>
+                  <p><strong>{t('admin.date', 'Date')}:</strong> {new Date(order.createdAt).toLocaleString()}</p>
                   <button
                     onClick={() => handleClearOrder(order.id)}
                     className="px-3 py-1 rounded mt-2 theme-success"
                   >
-                    Mark Delivered
+                    {t('admin.markDelivered', 'Mark Delivered')}
                   </button>
                   </div>
                 ))}
@@ -274,20 +274,20 @@ export default function Admin() {
             </div>
           )}
           <div>
-            <h2 className="text-2xl font-semibold mb-4">Users</h2>
+            <h2 className="text-2xl font-semibold mb-4">{t('admin.users', 'Users')}</h2>
             <div className="section-bar"></div>
             <div className="max-h-[45vh] sm:max-h-[50vh] lg:max-h-[60vh] overflow-y-auto pr-2 no-scrollbar fancy-scroll">
               {users.map((user) => (
                 <div key={user.id} className="border p-4 rounded mb-4">
-                  <p><strong>Name:</strong> {user.name}</p>
+                  <p><strong>{t('admin.name', 'Name')}:</strong> {user.name}</p>
                   <p><strong>Email:</strong> {user.email}</p>
-                  <p><strong>Role:</strong> {user.role === 'farmer' ? t('role.farmer', 'Farmer') : t('role.customer', 'Customer')}</p>
-                  <p><strong>Joined:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
+                  <p><strong>{t('admin.role', 'Role')}:</strong> {user.role === 'farmer' ? t('roles.farmer', 'Farmer') : t('roles.customer', 'Customer')}</p>
+                  <p><strong>{t('admin.joined', 'Joined')}:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
                   <button
                     onClick={() => handleDeleteUser(user.id)}
                     className="bg-red-500 text-white px-3 py-1 rounded mt-2"
                   >
-                    Delete User
+                    {t('admin.deleteUser', 'Delete User')}
                   </button>
                 </div>
               ))}

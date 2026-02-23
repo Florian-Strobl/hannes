@@ -30,7 +30,7 @@ function ResetPasswordContent() {
           const data = await res.json();
           setCanResetPin(data.exists && data.role === 'farmer');
           if (!data.exists) {
-            setError("Email doesn't exist!");
+            setError(t('reset.emailMissing', "Email doesn't exist!"));
           }
           if (!data.exists || data.role !== 'farmer') {
             setType('password');
@@ -85,10 +85,10 @@ function ResetPasswordContent() {
         alert(t('reset.success', 'Reset successful! You can now login with your new {type}.').replace('{type}', nextType));
         router.push('/login');
       } else {
-        setError(data.error || 'Reset failed');
+        setError(data.error || t('reset.failed', 'Reset failed'));
       }
     } catch {
-      setError('An error occurred');
+      setError(t('reset.errorOccurred', 'An error occurred'));
     } finally {
       setLoading(false);
     }
@@ -195,11 +195,13 @@ function ResetPasswordContent() {
 }
 
 export default function ResetPassword() {
+  const { t } = useTranslation();
+
   return (
     <Suspense fallback={
       <div>
         <Nav />
-        <div className="container mx-auto p-4">Loading...</div>
+        <div className="container mx-auto p-4">{t('common.loading', 'Loading...')}</div>
       </div>
     }>
       <ResetPasswordContent />
