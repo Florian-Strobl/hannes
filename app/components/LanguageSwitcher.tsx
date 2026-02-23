@@ -92,41 +92,50 @@ export default function LanguageSwitcher() {
                 opacity: 0, 
                 width: 48,
                 height: 48,
-                borderRadius: '9999px'
+                borderRadius: '9999px',
+                scale: 0.8,
+                rotateZ: -5
               }}
               animate={{ 
                 opacity: 1, 
                 width: 290,
                 height: 'auto',
-                borderRadius: '12px'
+                borderRadius: '12px',
+                scale: 1,
+                rotateZ: 0
               }}
               exit={{ 
                 opacity: 0, 
                 width: 48,
                 height: 48,
-                borderRadius: '9999px'
+                borderRadius: '9999px',
+                scale: 0.8,
+                rotateZ: -5
               }}
               transition={{ 
-                duration: 0.4, 
+                duration: 0.5, 
                 type: 'spring', 
-                stiffness: 300, 
-                damping: 30,
-                width: { duration: 0.4, type: 'spring', stiffness: 300, damping: 30 },
-                height: { duration: 0.4, type: 'spring', stiffness: 300, damping: 30 },
-                borderRadius: { duration: 0.4, type: 'spring', stiffness: 300, damping: 30 }
+                stiffness: 280, 
+                damping: 28,
+                width: { duration: 0.5, type: 'spring', stiffness: 280, damping: 28 },
+                height: { duration: 0.5, type: 'spring', stiffness: 280, damping: 28 },
+                borderRadius: { duration: 0.5, type: 'spring', stiffness: 280, damping: 28 },
+                scale: { duration: 0.5, type: 'spring', stiffness: 300, damping: 25 },
+                rotateZ: { duration: 0.5, type: 'spring', stiffness: 300, damping: 25 }
               }}
-              className="language-panel absolute bottom-0 right-0 border p-3 overflow-hidden"
+              className="language-panel absolute bottom-0 right-0 border p-3 overflow-hidden shadow-lg"
               style={{ 
                 transformOrigin: 'bottom right',
                 backgroundColor: 'var(--card-bg)',
-                borderColor: 'var(--card-border)'
+                borderColor: 'var(--card-border)',
+                backdropFilter: 'blur(8px)'
               }}
             >
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ delay: 0.2, duration: 0.2 }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ delay: 0.25, duration: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
               >
                 <div className="mb-3 flex items-center justify-between">
                   <div className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
@@ -160,14 +169,20 @@ export default function LanguageSwitcher() {
                     <motion.button
                       key={item.code}
                       type="button"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.25 + idx * 0.02 }}
+                      initial={{ opacity: 0, x: -15, rotateZ: -2 }}
+                      animate={{ opacity: 1, x: 0, rotateZ: 0 }}
+                      transition={{ delay: 0.3 + idx * 0.025, type: 'spring', stiffness: 300, damping: 20 }}
                       onClick={() => {
                         applyLanguage(item.code);
                         setOpen(false);
                         setQuery('');
                       }}
+                      whileHover={{ 
+                        scale: 1.05, 
+                        x: 4,
+                        backgroundColor: 'color-mix(in srgb, var(--accent) 15%, var(--card-bg))'
+                      }}
+                      whileTap={{ scale: 0.98 }}
                       className={`w-full rounded-md px-3 py-2 text-left text-sm transition ${
                         language === item.code ? 'language-item-active' : 'language-item'
                       }`}
@@ -190,11 +205,12 @@ export default function LanguageSwitcher() {
               className="language-fab absolute bottom-0 right-0 h-12 min-w-12 rounded-full px-4 text-sm font-semibold"
               onClick={() => setOpen(true)}
               aria-label="Open language selector"
-              initial={{ opacity: 0, scale: 0.4 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.4 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.35, type: 'spring', stiffness: 350, damping: 35 }}
+              initial={{ opacity: 0, scale: 0.3, rotateZ: 5 }}
+              animate={{ opacity: 1, scale: 1, rotateZ: 0 }}
+              exit={{ opacity: 0, scale: 0.3, rotateZ: 5 }}
+              whileHover={{ scale: 1.1, y: -3 }}
+              whileTap={{ scale: 0.92 }}
+              transition={{ duration: 0.4, type: 'spring', stiffness: 350, damping: 32 }}
               style={{ transformOrigin: 'bottom right' }}
             >
               {t('lang.button', '🌐 Language')}
