@@ -31,6 +31,7 @@ export default function Home() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [search, setSearch] = useState('');
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [glowIntensity, setGlowIntensity] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const fetchMeats = async () => {
@@ -52,6 +53,22 @@ export default function Home() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setCursorPos({ x, y });
+  };
+
+  const handleTextMouseMove = (e: React.MouseEvent<HTMLHeadingElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+    const maxDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
+    const intensity = Math.max(0, 1 - distance / maxDistance);
+    setGlowIntensity(intensity);
+  };
+
+  const handleTextMouseLeave = () => {
+    setGlowIntensity(0);
   };
 
   useEffect(() => {
@@ -236,9 +253,16 @@ export default function Home() {
                   animate={{ opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
                   className="no-offers-text text-3xl sm:text-4xl md:text-5xl font-black"
+                  onMouseMove={handleTextMouseMove}
+                  onMouseLeave={handleTextMouseLeave}
                   style={{
                     '--cursor-x': `${cursorPos.x}px`,
                     '--cursor-y': `${cursorPos.y}px`,
+                    filter: `
+                      drop-shadow(0 0 ${2 + glowIntensity * 6}px var(--accent-strong))
+                      drop-shadow(0 0 ${8 + glowIntensity * 12}px color-mix(in srgb, var(--accent) ${50 + glowIntensity * 30}%, transparent))
+                      drop-shadow(0 0 ${16 + glowIntensity * 20}px color-mix(in srgb, var(--accent-warm) ${30 + glowIntensity * 40}%, transparent))
+                    `,
                   } as React.CSSProperties & { '--cursor-x': string; '--cursor-y': string }}
                 >
                   {t('home.noOffers', 'No offers yet')}
